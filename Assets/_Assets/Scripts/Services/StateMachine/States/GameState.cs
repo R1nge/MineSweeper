@@ -1,14 +1,23 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using _Assets.Scripts.Gameplay;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
     public class GameState : IAsyncState
     {
         private readonly GameStateMachine _stateMachine;
+        private readonly GridController _gridController;
 
-        public GameState(GameStateMachine stateMachine) => _stateMachine = stateMachine;
+        public GameState(GameStateMachine stateMachine, GridController gridController)
+        {
+            _stateMachine = stateMachine;
+            _gridController = gridController;
+        }
 
-        public async UniTask Enter() { }
+        public async UniTask Enter()
+        {
+            _gridController.Init();
+        }
 
         public async UniTask Exit() { }
     }

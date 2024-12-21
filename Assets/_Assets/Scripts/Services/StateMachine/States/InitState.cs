@@ -19,6 +19,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             await UniTask.Delay(1000);
             await _uiStateMachine.SwitchState(UIStateType.Game);
+            await _stateMachine.SwitchState(GameStateType.Game);
         }
 
         public async UniTask Exit()
