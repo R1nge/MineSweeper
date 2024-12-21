@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6132456206071365701}
   - component: {fileID: 651676716964285684}
   - component: {fileID: 3412285765753443011}
+  - component: {fileID: -6020428214072555206}
   m_Layer: 5
   m_Name: CellView
   m_TagString: Untagged
@@ -75,3 +76,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-6020428214072555206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825172435264848383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32093ac3ee1f4dc29644edbc7b9b0854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 3412285765753443011}
+  empty: {r: 1, g: 1, b: 1, a: 1}
+  mine: {r: 1, g: 0.10849059, b: 0.10849059, a: 1}
+  flag: {r: 0.3915094, g: 1, b: 0.5293856, a: 1}

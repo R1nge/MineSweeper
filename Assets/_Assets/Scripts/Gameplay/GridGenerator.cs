@@ -6,8 +6,10 @@ namespace _Assets.Scripts.Gameplay
     public class GridGenerator
     {
         private CellType[,] _cells;
+        public CellType[,] Cells => _cells;
         public CellType[,] Generate(int width, int height)
         {
+            _cells = new CellType[width, height];
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
