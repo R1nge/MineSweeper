@@ -34,7 +34,14 @@ namespace _Assets.Scripts.Gameplay
 
         public void SetNeighboursNumber(int count)
         {
-            neighboursCount.text = count.ToString();
+            if (count == 0)
+            {
+                neighboursCount.text = string.Empty;
+            }
+            else
+            {
+                neighboursCount.text = count.ToString();
+            }
         }
     }
 }
