@@ -3,11 +3,13 @@
 namespace _Assets.Scripts.Gameplay
 {
     [Serializable]
-    public class Cell
+    public class CellModel
     {
         public int X;
         public int Y;
         public CellType Type;
+        public int NeighboursCount;
+        public bool Revealed;
 
         public void SetPosition(int x, int y)
         {
@@ -18,6 +20,16 @@ namespace _Assets.Scripts.Gameplay
         public void SetType(CellType cellType)
         {
             Type = cellType;
+        }
+
+        public void SetNeighboursNumber(int count)
+        {
+            NeighboursCount = count;
+        }
+
+        public void Reveal()
+        {
+            Revealed = true;
         }
     }
 }

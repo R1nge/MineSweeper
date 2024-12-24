@@ -10,13 +10,10 @@ namespace _Assets.Scripts.Gameplay
         [SerializeField] private Image image;
         [SerializeField] private Color empty, mine, flag;
         [SerializeField] private TextMeshProUGUI neighboursCount;
-        private CellType _cellType;
-        public CellType CellType => _cellType;
 
-        public void Init(CellType cellType)
+        public void Init(CellModel cellModel)
         {
-            _cellType = cellType;
-            switch (cellType)
+            switch (cellModel.Type)
             {
                 case CellType.Empty:
                     image.color = empty;
@@ -28,7 +25,7 @@ namespace _Assets.Scripts.Gameplay
                     image.color = mine;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
+                    throw new ArgumentOutOfRangeException(nameof(cellModel.Type), cellModel.Type, null);
             }
         }
 
