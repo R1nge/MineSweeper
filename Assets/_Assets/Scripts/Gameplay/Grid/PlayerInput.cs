@@ -32,10 +32,28 @@ namespace _Assets.Scripts.Gameplay.Grid
                 foreach (RaycastResult result in results)
                 {
                     Debug.Log("Hit " + result.gameObject.name);
-                    
+
                     if (result.gameObject.TryGetComponent(out CellView cellView))
                     {
                         _gridController.Reveal(cellView);
+                    }
+                }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+                pointerEventData.position = Input.mousePosition;
+
+                List<RaycastResult> results = new List<RaycastResult>();
+                raycaster.Raycast(pointerEventData, results);
+
+                foreach (RaycastResult result in results)
+                {
+                    Debug.Log("Hit " + result.gameObject.name);
+
+                    if (result.gameObject.TryGetComponent(out CellView cellView))
+                    {
+                        _gridController.Flag(cellView);
                     }
                 }
             }

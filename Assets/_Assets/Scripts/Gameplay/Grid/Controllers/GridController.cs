@@ -34,8 +34,23 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             _gridView.Init(_gridModel);
         }
 
+        public void Flag(CellView cellView)
+        {
+            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed)
+            {
+                return;
+            }
+
+            cellView.Flag();
+        }
+
         public void Reveal(CellView cellView)
         {
+            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed)
+            {
+                return;
+            }
+
             Debug.Log("reveal");
             var x = cellView.X;
             var y = cellView.Y;

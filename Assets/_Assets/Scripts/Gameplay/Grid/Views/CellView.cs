@@ -37,5 +37,10 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
 
             this.neighboursCount.text = neighboursCount.ToString();
         }
+        
+        public void Flag()
+        {
+            image.color = flag;
+        }
     }
 }
