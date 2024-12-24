@@ -30,5 +30,14 @@ namespace _Assets.Scripts.Gameplay
             _gridView = _objectResolver.Instantiate(_configProvider._GridView, parent);
             _gridView.Init(_gridModel);
         }
+        
+        public void Reveal(CellView cellView)
+        {
+            Debug.Log("reveal");
+            var x = cellView.X;
+            var y = cellView.Y;
+            _gridModel.Cells[x, y].Reveal();
+            cellView.Reveal(_gridModel.Cells[x,y]);
+        }
     }
 }

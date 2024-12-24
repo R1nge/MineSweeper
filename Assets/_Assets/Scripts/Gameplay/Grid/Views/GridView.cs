@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Gameplay
                 {
                     var cell = _objectResolver.Instantiate(cellView, transform);
                     _cells[x, y] = cell;
-                    _cells[x, y].Init(gridModel.Cells[x, y]);
+                    _cells[x, y].Init(x, y);
                 }
             }
 
