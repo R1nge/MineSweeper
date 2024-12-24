@@ -16,6 +16,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
         private GridModel _gridModel;
         private GridView _gridView;
 
+        private readonly Dictionary<CellModel, CellType> _flaggedCells = new();
+
         public GridController(ConfigProvider configProvider, GridGenerator gridGenerator,
             IObjectResolver objectResolver)
         {
@@ -36,26 +38,36 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
 
         public void Flag(CellView cellView)
         {
-            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed)
+            var model = _gridModel.Cells[cellView.X, cellView.Y];
+
+            if (model.Revealed)
             {
                 return;
             }
-            
-            if (_gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
+
+            if (model.Type == CellType.Flag)
             {
-                _gridModel.Cells[cellView.X, cellView.Y].SetType(CellType.Empty);
-                cellView.UnFlag();
+                if (_flaggedCells.TryGetValue(model, out var type))
+                {
+                    model.SetType(type);
+                    cellView.UnFlag();
+                    _flaggedCells.Remove(model);
+                }
             }
             else
             {
-                _gridModel.Cells[cellView.X, cellView.Y].SetType(CellType.Flag);
-                cellView.Flag();
+                if (_flaggedCells.TryAdd(model, model.Type))
+                {
+                    _gridModel.Cells[cellView.X, cellView.Y].SetType(CellType.Flag);
+                    cellView.Flag();
+                }
             }
         }
 
         public void Reveal(CellView cellView)
         {
-            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed || _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
+            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed ||
+                _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
             {
                 return;
             }
@@ -82,6 +94,11 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 {
                     break;
                 }
+            }
+
+            if (GridHelper.CheckWin(_gridModel.Cells))
+            {
+                Debug.LogError("win");
             }
         }
     }

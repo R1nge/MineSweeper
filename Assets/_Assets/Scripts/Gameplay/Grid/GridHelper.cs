@@ -59,5 +59,31 @@ namespace _Assets.Scripts.Gameplay.Grid
 
             return neighbors; 
         }
+
+        public static bool CheckWin(CellModel[,] _cells)
+        {
+            for (int y = 0; y < _cells.GetLength(1); y++)
+            {
+                for (int x = 0; x < _cells.GetLength(0); x++)
+                {
+                    if (_cells[x, y].Type == CellType.Mine)
+                    {
+                        if (_cells[x, y].Revealed)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!_cells[x, y].Revealed)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }
