@@ -1,9 +1,11 @@
 ﻿using _Assets.Scripts.Configs;
+using _Assets.Scripts.Gameplay.Grid.Models;
+using _Assets.Scripts.Gameplay.Grid.Views;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace _Assets.Scripts.Gameplay
+namespace _Assets.Scripts.Gameplay.Grid.Controllers
 {
     public class GridController
     {
@@ -37,7 +39,7 @@ namespace _Assets.Scripts.Gameplay
             var x = cellView.X;
             var y = cellView.Y;
             _gridModel.Cells[x, y].Reveal();
-            cellView.Reveal(_gridModel.Cells[x,y]);
+            cellView.Reveal(_gridModel.Cells[x,y].Type);
         }
     }
 }

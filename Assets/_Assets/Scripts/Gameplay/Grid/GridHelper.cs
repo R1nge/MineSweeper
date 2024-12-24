@@ -1,4 +1,6 @@
-﻿namespace _Assets.Scripts.Gameplay.Grid
+﻿using _Assets.Scripts.Gameplay.Grid.Models;
+
+namespace _Assets.Scripts.Gameplay.Grid
 {
     public static class GridHelper
     {

@@ -1,4 +1,4 @@
-﻿namespace _Assets.Scripts.Gameplay
+﻿namespace _Assets.Scripts.Gameplay.Grid.Models
 {
     public class GridModel
     {

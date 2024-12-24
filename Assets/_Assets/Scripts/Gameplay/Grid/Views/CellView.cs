@@ -1,9 +1,9 @@
-﻿using System;
+﻿using _Assets.Scripts.Gameplay.Grid.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Assets.Scripts.Gameplay
+namespace _Assets.Scripts.Gameplay.Grid.Views
 {
     public class CellView : MonoBehaviour
     {
@@ -20,9 +20,9 @@ namespace _Assets.Scripts.Gameplay
             Y = y;
         }
 
-        public void Reveal(CellModel cellModel)
+        public void Reveal(CellType cellType)
         {
-            switch (cellModel.Type)
+            switch (cellType)
             {
                 case CellType.Empty:
                     image.color = empty;

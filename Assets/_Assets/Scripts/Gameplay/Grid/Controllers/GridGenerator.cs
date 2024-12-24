@@ -1,10 +1,7 @@
-﻿using System;
-using _Assets.Scripts.Gameplay.Grid;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using UnityEngine;
+﻿using _Assets.Scripts.Gameplay.Grid.Models;
 using Random = UnityEngine.Random;
 
-namespace _Assets.Scripts.Gameplay
+namespace _Assets.Scripts.Gameplay.Grid.Controllers
 {
     public class GridGenerator
     {

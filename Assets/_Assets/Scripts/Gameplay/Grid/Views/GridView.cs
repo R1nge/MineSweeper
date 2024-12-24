@@ -1,9 +1,9 @@
-﻿using _Assets.Scripts.Gameplay.Grid;
+﻿using _Assets.Scripts.Gameplay.Grid.Models;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace _Assets.Scripts.Gameplay
+namespace _Assets.Scripts.Gameplay.Grid.Views
 {
     public class GridView : MonoBehaviour
     {

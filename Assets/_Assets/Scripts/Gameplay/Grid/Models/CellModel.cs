@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Assets.Scripts.Gameplay
+namespace _Assets.Scripts.Gameplay.Grid.Models
 {
     [Serializable]
     public class CellModel
