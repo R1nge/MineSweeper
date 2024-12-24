@@ -38,9 +38,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
             this.neighboursCount.text = neighboursCount.ToString();
         }
         
-        public void Flag()
-        {
-            image.color = flag;
-        }
+        public void Flag() => image.color = flag;
+        
+        public void UnFlag() => image.color = empty;
     }
 }

@@ -40,13 +40,22 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             {
                 return;
             }
-
-            cellView.Flag();
+            
+            if (_gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
+            {
+                _gridModel.Cells[cellView.X, cellView.Y].SetType(CellType.Empty);
+                cellView.UnFlag();
+            }
+            else
+            {
+                _gridModel.Cells[cellView.X, cellView.Y].SetType(CellType.Flag);
+                cellView.Flag();
+            }
         }
 
         public void Reveal(CellView cellView)
         {
-            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed)
+            if (_gridModel.Cells[cellView.X, cellView.Y].Revealed || _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
             {
                 return;
             }
