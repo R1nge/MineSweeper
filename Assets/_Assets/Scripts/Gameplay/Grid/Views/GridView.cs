@@ -32,17 +32,6 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                         new Vector3(x * 50, y * 50, 0);
                 }
             }
-
-            for (int y = 0; y < gridModel.Height; y++)
-            {
-                for (int x = 0; x < gridModel.Width; x++)
-                {
-                    if (gridModel.Cells[x, y].Revealed)
-                    {
-                        _cells[x, y].SetNeighboursNumber(gridModel.Cells[x, y].NeighboursCount);
-                    }
-                }
-            }
         }
     }
 }

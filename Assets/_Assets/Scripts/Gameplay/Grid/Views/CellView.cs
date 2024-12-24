@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
             Y = y;
         }
 
-        public void Reveal(CellType cellType)
+        public void Reveal(CellType cellType, int neighboursCount)
         {
             switch (cellType)
             {
@@ -34,18 +34,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                     image.color = flag;
                     break;
             }
-        }
 
-        public void SetNeighboursNumber(int count)
-        {
-            if (count == 0)
-            {
-                neighboursCount.text = string.Empty;
-            }
-            else
-            {
-                neighboursCount.text = count.ToString();
-            }
+            this.neighboursCount.text = neighboursCount.ToString();
         }
     }
 }

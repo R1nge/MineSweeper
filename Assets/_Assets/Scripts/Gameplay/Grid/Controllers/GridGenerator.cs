@@ -6,7 +6,6 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
     public class GridGenerator
     {
         private GridModel _grid;
-        public GridModel Grid => _grid;
 
         public GridModel Generate(int width, int height)
         {

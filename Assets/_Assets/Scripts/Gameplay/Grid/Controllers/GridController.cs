@@ -39,7 +39,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             var x = cellView.X;
             var y = cellView.Y;
             _gridModel.Cells[x, y].Reveal();
-            cellView.Reveal(_gridModel.Cells[x,y].Type);
+            cellView.Reveal(_gridModel.Cells[x,y].Type, _gridModel.Cells[x, y].NeighboursCount);
         }
     }
 }
