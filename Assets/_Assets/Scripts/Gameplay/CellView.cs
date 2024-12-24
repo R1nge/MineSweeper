@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,13 @@ namespace _Assets.Scripts.Gameplay
     {
         [SerializeField] private Image image;
         [SerializeField] private Color empty, mine, flag;
+        [SerializeField] private TextMeshProUGUI neighboursCount;
+        private CellType _cellType;
+        public CellType CellType => _cellType;
 
         public void Init(CellType cellType)
         {
+            _cellType = cellType;
             switch (cellType)
             {
                 case CellType.Empty:
@@ -25,6 +30,11 @@ namespace _Assets.Scripts.Gameplay
                 default:
                     throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
             }
+        }
+
+        public void SetNeighboursNumber(int count)
+        {
+            neighboursCount.text = count.ToString();
         }
     }
 }
