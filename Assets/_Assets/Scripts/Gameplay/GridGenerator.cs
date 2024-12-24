@@ -14,7 +14,18 @@ namespace _Assets.Scripts.Gameplay
             {
                 for (int x = 0; x < width; x++)
                 {
-                    _cells[x, y] = GetRandomCellType();
+                    _cells[x, y] = CellType.Empty;
+                }
+            }
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (Random.Range(0, 50) == 0)
+                    {
+                        _cells[x, y] = CellType.Mine;
+                    }
                 }
             }
 
