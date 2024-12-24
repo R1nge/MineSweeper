@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Configs;
+﻿using System.Collections.Generic;
+using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Grid.Models;
 using _Assets.Scripts.Gameplay.Grid.Views;
 using UnityEngine;
@@ -32,14 +33,32 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             _gridView = _objectResolver.Instantiate(_configProvider._GridView, parent);
             _gridView.Init(_gridModel);
         }
-        
+
         public void Reveal(CellView cellView)
         {
             Debug.Log("reveal");
             var x = cellView.X;
             var y = cellView.Y;
             _gridModel.Cells[x, y].Reveal();
-            cellView.Reveal(_gridModel.Cells[x,y].Type, _gridModel.Cells[x, y].NeighboursCount);
+            cellView.Reveal(_gridModel.Cells[x, y].Type, _gridModel.Cells[x, y].NeighboursCount);
+
+            var neighbors = GridHelper.GetNeighbors(_gridModel.Cells, x, y);
+
+
+            foreach (var neighbor in neighbors)
+            {
+                if (neighbor.Type == CellType.Empty)
+                {
+                    if (!neighbor.Revealed)
+                    {
+                        Reveal(_gridView.GetCellView(neighbor.X, neighbor.Y));
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
     }
 }

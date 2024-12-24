@@ -33,5 +33,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                 }
             }
         }
+        
+        public CellView GetCellView(int x, int y) => cellView = _cells[x, y];
     }
 }

@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Gameplay.Grid.Models;
+﻿using System.Collections.Generic;
+using _Assets.Scripts.Gameplay.Grid.Models;
 
 namespace _Assets.Scripts.Gameplay.Grid
 {
@@ -31,6 +32,32 @@ namespace _Assets.Scripts.Gameplay.Grid
             }
 
             return count;
+        }
+
+        public static List<CellModel> GetNeighbors(CellModel[,] _cells, int x, int y)
+        {
+            List<CellModel> neighbors = new List<CellModel>();
+            int width = _cells.GetLength(0);
+            int height = _cells.GetLength(1);
+
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    if (i == 0 && j == 0)
+                        continue;
+
+                    int neighborX = x + i;
+                    int neighborY = y + j;
+
+                    if (neighborX >= 0 && neighborX < width && neighborY >= 0 && neighborY < height)
+                    {
+                        neighbors.Add(_cells[neighborX, neighborY]);
+                    }
+                }
+            }
+
+            return neighbors; 
         }
     }
 }

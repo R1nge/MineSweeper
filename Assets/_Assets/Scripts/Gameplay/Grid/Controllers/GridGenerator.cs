@@ -22,7 +22,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             {
                 for (int x = 0; x < width; x++)
                 {
-                    if (Random.Range(0, 50) == 0)
+                    if (Random.Range(0, 5) == 0)
                     {
                         _grid.Cells[x, y].SetType(CellType.Mine);
                     }
