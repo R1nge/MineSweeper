@@ -13,11 +13,30 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
         public int X { get; private set; }
         public int Y { get; private set; }
 
-        public void Init(int x, int y)
+        public void Init(int x, int y, CellType cellType, bool isRevealed, int neighboursCount)
         {
-            image.color = empty;
             X = x;
             Y = y;
+
+            if (isRevealed)
+            {
+                switch (cellType)
+                {
+                    case CellType.Empty:
+                        image.color = empty;
+                        break;
+                    case CellType.Mine:
+                        image.color = mine;
+                        break;
+                    case CellType.Flag:
+                        image.color = flag;
+                        break;
+                }
+            }
+            else
+            {
+                image.color = empty;
+            }
         }
 
         public GameObject GameObject => gameObject;
@@ -39,9 +58,9 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
 
             this.neighboursCount.text = neighboursCount.ToString();
         }
-        
+
         public void Flag() => image.color = flag;
-        
+
         public void UnFlag() => image.color = empty;
     }
 }

@@ -29,6 +29,44 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 }
             }
 
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    var neighboursCount = GridHelper.CountNeighbors(_grid.Cells, x, y, CellType.Mine);
+                    _grid.Cells[x, y].SetNeighboursNumber(neighboursCount);
+                }
+            }
+
+            return _grid;
+        }
+
+        public GridModel GenerateEmpty(int width, int height)
+        {
+            _grid = new GridModel(width, height);
+            return _grid;
+        }
+
+        public GridModel FillWithMines(int width, int height, int clickedX, int clickedY)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    _grid.Cells[x, y].SetType(CellType.Empty);
+                }
+            }
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (Random.Range(0, 5) == 0)
+                    {
+                        _grid.Cells[x, y].SetType(CellType.Mine);
+                    }
+                }
+            }
 
             for (int y = 0; y < height; y++)
             {
@@ -38,6 +76,9 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                     _grid.Cells[x, y].SetNeighboursNumber(neighboursCount);
                 }
             }
+
+            _grid.Cells[clickedX, clickedY].SetType(CellType.Empty);
+            _grid.Cells[clickedX, clickedY].Revealed = true;
 
             return _grid;
         }

@@ -13,6 +13,17 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
 
         public void Init(GridModel gridModel)
         {
+            if (_cells != null)
+            {
+                for (int y = _cells.GetLength(0) - 1; y >= 0; y--)
+                {
+                    for (int x = _cells.GetLength(1) - 1; x >= 0; x--)
+                    {
+                        Destroy(_cells[x, y].GameObject);
+                    }
+                }
+            }
+            
             _cells = new ICellView[gridModel.Width, gridModel.Height];
             for (int y = 0; y < gridModel.Height; y++)
             {
@@ -20,7 +31,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                 {
                     var cell = _objectResolver.Instantiate(cellView, transform);
                     _cells[x, y] = cell.GetComponent<ICellView>();
-                    _cells[x, y].Init(x, y);
+                    var cellData = gridModel.Cells[x, y];
+                    _cells[x, y].Init(x, y, cellData.Type, cellData.Revealed, cellData.NeighboursCount);
                 }
             }
 

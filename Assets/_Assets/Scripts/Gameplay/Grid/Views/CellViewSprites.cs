@@ -32,7 +32,48 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                 default:
                     throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
             }
+            
+            UpdateNeighboursCount(neighboursCount);
+        }
 
+        public void Flag() => image.sprite = flag;
+
+        public void UnFlag() => image.sprite = unrevealed;
+
+        public void Init(int x, int y, CellType cellType, bool isRevealed, int neighboursCount)
+        {
+            X = x;
+            Y = y;
+
+            if (isRevealed)
+            {
+                switch (cellType)
+                {
+                    case CellType.Empty:
+                        image.sprite = empty;
+                        break;
+                    case CellType.Flag:
+                        image.sprite = flag;
+                        break;
+                    case CellType.Mine:
+                        image.sprite = mine;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
+                }
+            }
+            else
+            {
+                image.sprite = unrevealed;
+            }
+            
+            UpdateNeighboursCount(neighboursCount);
+        }
+
+        public GameObject GameObject => gameObject;
+
+        private void UpdateNeighboursCount(int neighboursCount)
+        {
             if (neighboursCount == 0)
             {
                 this.neighboursCount.text = String.Empty;
@@ -42,24 +83,5 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                 this.neighboursCount.text = neighboursCount.ToString();
             }
         }
-
-        public void Flag()
-        {
-            image.sprite = flag;
-        }
-
-        public void UnFlag()
-        {
-            image.sprite = unrevealed;
-        }
-
-        public void Init(int x, int y)
-        {
-            X = x;
-            Y = y;
-            image.sprite = unrevealed;
-        }
-
-        public GameObject GameObject => gameObject;
     }
 }

@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
         public void Reveal(CellType cellType, int neighboursCount);
         public void Flag();
         public void UnFlag();
-        public void Init(int x, int y);
+        public void Init(int x, int y, CellType cellType, bool isRevealed, int neighboursCount);
         public GameObject GameObject { get; }
     }
 }

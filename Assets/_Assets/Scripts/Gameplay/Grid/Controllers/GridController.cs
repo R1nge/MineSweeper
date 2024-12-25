@@ -15,6 +15,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
         private readonly IObjectResolver _objectResolver;
         private GridModel _gridModel;
         private GridView _gridView;
+        private bool _isFirstReveal;
 
         private readonly Dictionary<CellModel, CellType> _flaggedCells = new();
 
@@ -30,10 +31,24 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
         {
             var width = 20;
             var height = 20;
-            _gridModel = _gridGenerator.Generate(width, height);
+            _gridModel = _gridGenerator.GenerateEmpty(width, height);
             var parent = GameObject.Find("GameUI(Clone)").transform;
             _gridView = _objectResolver.Instantiate(_configProvider._GridView, parent);
             _gridView.Init(_gridModel);
+        }
+
+        public bool TryFillWithMines(ICellView cellView)
+        {
+            if (_isFirstReveal)
+            {
+                return false;
+            }
+
+            _gridModel = _gridGenerator.FillWithMines(_gridModel.Width, _gridModel.Height, cellView.X, cellView.Y);
+            _gridView.Init(_gridModel);
+            Reveal(cellView);
+            _isFirstReveal = true;
+            return true;
         }
 
         public void Flag(ICellView cellView)
@@ -76,9 +91,9 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             var x = cellView.X;
             var y = cellView.Y;
             _gridModel.Cells[x, y].Reveal();
-            cellView.Reveal(_gridModel.Cells[x, y].Type, _gridModel.Cells[x, y].NeighboursCount);
 
             var neighbors = GridHelper.GetNeighbors(_gridModel.Cells, x, y);
+            cellView.Init(_gridModel.Cells[x,y].X, _gridModel.Cells[x,y].Y, _gridModel.Cells[x,y].Type, true, neighbors.Count);
 
 
             foreach (var neighbor in neighbors)

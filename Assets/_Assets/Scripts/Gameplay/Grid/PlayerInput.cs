@@ -35,7 +35,10 @@ namespace _Assets.Scripts.Gameplay.Grid
 
                     if (result.gameObject.TryGetComponent(out ICellView cellView))
                     {
-                        _gridController.Reveal(cellView);
+                        if (!_gridController.TryFillWithMines(cellView))
+                        {
+                            _gridController.Reveal(cellView);
+                        }
                     }
                 }
             }
