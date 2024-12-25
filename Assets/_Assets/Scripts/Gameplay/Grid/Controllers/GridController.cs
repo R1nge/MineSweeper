@@ -87,11 +87,18 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 return;
             }
 
-            Debug.Log($"reveal X{cellView.X} Y{cellView.Y} Type{_gridModel.Cells[cellView.X, cellView.Y].Type} NeighboursCount{_gridModel.Cells[cellView.X, cellView.Y].NeighboursCount}");
+            Debug.Log(
+                $"reveal X{cellView.X} Y{cellView.Y} Type{_gridModel.Cells[cellView.X, cellView.Y].Type} NeighboursCount{_gridModel.Cells[cellView.X, cellView.Y].NeighboursCount}");
             var x = cellView.X;
             var y = cellView.Y;
             _gridModel.Cells[x, y].Reveal();
             cellView.Reveal(_gridModel.Cells[x, y].Type, _gridModel.Cells[x, y].NeighboursCount);
+
+            if (_gridModel.Cells[x, y].Type == CellType.Mine)
+            {
+                Debug.LogError("game over");
+                return;
+            }
 
             var neighbors = GridHelper.GetNeighbors(_gridModel.Cells, x, y);
             foreach (var neighbor in neighbors)
