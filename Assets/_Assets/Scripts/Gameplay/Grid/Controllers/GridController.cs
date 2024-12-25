@@ -29,8 +29,9 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
 
         public void Init()
         {
-            var width = 20;
-            var height = 20;
+            //Width and height should be even
+            var width = 6;
+            var height = 6;
             _gridModel = _gridGenerator.GenerateEmpty(width, height);
             var parent = GameObject.Find("GameUI(Clone)").transform;
             _gridView = _objectResolver.Instantiate(_configProvider._GridView, parent);
