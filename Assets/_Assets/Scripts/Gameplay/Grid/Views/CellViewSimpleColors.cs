@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace _Assets.Scripts.Gameplay.Grid.Views
 {
-    public class CellView : MonoBehaviour
+    public class CellViewSimpleColors : MonoBehaviour, ICellView
     {
         [SerializeField] private Image image;
         [SerializeField] private Color empty, mine, flag;
@@ -19,6 +19,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
             X = x;
             Y = y;
         }
+
+        public GameObject GameObject => gameObject;
 
         public void Reveal(CellType cellType, int neighboursCount)
         {

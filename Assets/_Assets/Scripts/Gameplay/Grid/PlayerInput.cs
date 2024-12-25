@@ -33,7 +33,7 @@ namespace _Assets.Scripts.Gameplay.Grid
                 {
                     Debug.Log("Hit " + result.gameObject.name);
 
-                    if (result.gameObject.TryGetComponent(out CellView cellView))
+                    if (result.gameObject.TryGetComponent(out ICellView cellView))
                     {
                         _gridController.Reveal(cellView);
                     }
@@ -51,7 +51,7 @@ namespace _Assets.Scripts.Gameplay.Grid
                 {
                     Debug.Log("Hit " + result.gameObject.name);
 
-                    if (result.gameObject.TryGetComponent(out CellView cellView))
+                    if (result.gameObject.TryGetComponent(out ICellView cellView))
                     {
                         _gridController.Flag(cellView);
                     }

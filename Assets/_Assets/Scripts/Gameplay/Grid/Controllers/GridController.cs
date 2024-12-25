@@ -36,7 +36,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             _gridView.Init(_gridModel);
         }
 
-        public void Flag(CellView cellView)
+        public void Flag(ICellView cellView)
         {
             var model = _gridModel.Cells[cellView.X, cellView.Y];
 
@@ -64,7 +64,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             }
         }
 
-        public void Reveal(CellView cellView)
+        public void Reveal(ICellView cellView)
         {
             if (_gridModel.Cells[cellView.X, cellView.Y].Revealed ||
                 _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
