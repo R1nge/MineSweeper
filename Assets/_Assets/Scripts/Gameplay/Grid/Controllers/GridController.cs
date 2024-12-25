@@ -85,6 +85,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             if (_gridModel.Cells[cellView.X, cellView.Y].Revealed ||
                 _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
             {
+                CheckWin();
                 return;
             }
 
@@ -116,7 +117,13 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                     break;
                 }
             }
+            
+            
+            CheckWin();
+        }
 
+        private void CheckWin()
+        {
             if (GridHelper.CheckWin(_gridModel.Cells))
             {
                 Debug.LogError("win");

@@ -66,7 +66,7 @@ namespace _Assets.Scripts.Gameplay.Grid
             {
                 for (int x = 0; x < _cells.GetLength(0); x++)
                 {
-                    if (_cells[x, y].Type == CellType.Mine)
+                    if (_cells[x, y].Type == CellType.Mine || _cells[x,y].Type == CellType.Flag)
                     {
                         if (_cells[x, y].Revealed)
                         {
