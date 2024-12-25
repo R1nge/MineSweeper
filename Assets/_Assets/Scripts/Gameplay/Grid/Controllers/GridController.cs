@@ -45,9 +45,9 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             }
 
             _gridModel = _gridGenerator.FillWithMines(_gridModel.Width, _gridModel.Height, cellView.X, cellView.Y);
-            _gridView.Init(_gridModel);
-            Reveal(cellView);
             _isFirstReveal = true;
+            Reveal(cellView);
+            _gridView.Init(_gridModel);
             return true;
         }
 
@@ -87,15 +87,13 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 return;
             }
 
-            Debug.Log("reveal");
+            Debug.Log($"reveal X{cellView.X} Y{cellView.Y} Type{_gridModel.Cells[cellView.X, cellView.Y].Type} NeighboursCount{_gridModel.Cells[cellView.X, cellView.Y].NeighboursCount}");
             var x = cellView.X;
             var y = cellView.Y;
             _gridModel.Cells[x, y].Reveal();
+            cellView.Reveal(_gridModel.Cells[x, y].Type, _gridModel.Cells[x, y].NeighboursCount);
 
             var neighbors = GridHelper.GetNeighbors(_gridModel.Cells, x, y);
-            cellView.Init(_gridModel.Cells[x,y].X, _gridModel.Cells[x,y].Y, _gridModel.Cells[x,y].Type, true, neighbors.Count);
-
-
             foreach (var neighbor in neighbors)
             {
                 if (neighbor.Type == CellType.Empty)

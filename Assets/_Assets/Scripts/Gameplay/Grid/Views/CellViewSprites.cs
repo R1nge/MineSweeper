@@ -32,7 +32,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                 default:
                     throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
             }
-            
+
             UpdateNeighboursCount(neighboursCount);
         }
 
@@ -61,13 +61,13 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
                     default:
                         throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
                 }
+
+                UpdateNeighboursCount(neighboursCount);
             }
             else
             {
                 image.sprite = unrevealed;
             }
-            
-            UpdateNeighboursCount(neighboursCount);
         }
 
         public GameObject GameObject => gameObject;

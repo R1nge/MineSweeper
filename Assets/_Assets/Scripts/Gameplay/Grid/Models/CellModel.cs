@@ -17,19 +17,10 @@ namespace _Assets.Scripts.Gameplay.Grid.Models
             Y = y;
         }
 
-        public void SetType(CellType cellType)
-        {
-            Type = cellType;
-        }
+        public void SetType(CellType cellType) => Type = cellType;
 
-        public void SetNeighboursNumber(int count)
-        {
-            NeighboursCount = count;
-        }
+        public void SetNeighboursNumber(int count) => NeighboursCount = count;
 
-        public void Reveal()
-        {
-            Revealed = true;
-        }
+        public void Reveal() => Revealed = true;
     }
 }

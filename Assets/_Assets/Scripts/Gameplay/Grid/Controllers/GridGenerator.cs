@@ -68,6 +68,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 }
             }
 
+            _grid.Cells[clickedX, clickedY].SetType(CellType.Empty);
+
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -76,9 +78,6 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                     _grid.Cells[x, y].SetNeighboursNumber(neighboursCount);
                 }
             }
-
-            _grid.Cells[clickedX, clickedY].SetType(CellType.Empty);
-            _grid.Cells[clickedX, clickedY].Revealed = true;
 
             return _grid;
         }
