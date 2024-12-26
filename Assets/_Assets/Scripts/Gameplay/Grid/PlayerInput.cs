@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _Assets.Scripts.Gameplay.Grid.Controllers;
 using _Assets.Scripts.Gameplay.Grid.Views;
 using UnityEngine;
@@ -11,30 +10,44 @@ namespace _Assets.Scripts.Gameplay.Grid
 {
     public class PlayerInput : MonoBehaviour
     {
-        [SerializeField] private GraphicRaycaster raycaster;
-        [Inject] private GridController _gridController;
+        private GraphicRaycaster _raycaster;
+        private GridController _gridController;
+        private bool _enabled;
 
-        private void Awake()
+        public void Init(GraphicRaycaster raycaster, GridController gridController)
         {
-            raycaster = GetComponentInParent<GraphicRaycaster>();
+            _raycaster = raycaster;
+            _gridController = gridController;
         }
 
         private void Update()
         {
+            if (!_enabled)
+            {
+                return;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
                 pointerEventData.position = Input.mousePosition;
 
                 List<RaycastResult> results = new List<RaycastResult>();
-                raycaster.Raycast(pointerEventData, results);
+                _raycaster.Raycast(pointerEventData, results);
 
                 foreach (RaycastResult result in results)
                 {
-                    Debug.Log("Hit " + result.gameObject.name);
+                    if (!_enabled)
+                    {
+                        break;
+                    }
 
                     if (result.gameObject.TryGetComponent(out ICellView cellView))
                     {
+                        if (!_enabled)
+                        {
+                            break;
+                        }
                         if (!_gridController.TryFillWithMines(cellView))
                         {
                             _gridController.Reveal(cellView);
@@ -48,10 +61,15 @@ namespace _Assets.Scripts.Gameplay.Grid
                 pointerEventData.position = Input.mousePosition;
 
                 List<RaycastResult> results = new List<RaycastResult>();
-                raycaster.Raycast(pointerEventData, results);
+                _raycaster.Raycast(pointerEventData, results);
 
                 foreach (RaycastResult result in results)
                 {
+                    if (!_enabled)
+                    {
+                        break;
+                    }
+                    
                     Debug.Log("Hit " + result.gameObject.name);
 
                     if (result.gameObject.TryGetComponent(out ICellView cellView))
@@ -61,5 +79,9 @@ namespace _Assets.Scripts.Gameplay.Grid
                 }
             }
         }
+
+        public void Enable() => _enabled = true;
+
+        public void Disable() => _enabled = false;
     }
 }
