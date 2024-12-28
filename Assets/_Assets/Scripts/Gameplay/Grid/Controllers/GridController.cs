@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _Assets.Scripts.Gameplay.Grid.Models;
 using _Assets.Scripts.Gameplay.Grid.Views;
 using _Assets.Scripts.Services.Grid;
 using _Assets.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _Assets.Scripts.Gameplay.Grid.Controllers
 {
@@ -15,6 +18,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
         private GridView _gridView;
         private bool _isFirstReveal;
         private bool _isGameOver;
+        private float _delayBeforeRestart = 2;
 
         private readonly Dictionary<CellModel, CellType> _flaggedCells = new();
 
@@ -85,7 +89,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             }
         }
 
-        public void Reveal(ICellView cellView)
+        public async void Reveal(ICellView cellView)
         {
             if (_gridModel.Cells[cellView.X, cellView.Y].Revealed ||
                 _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
@@ -105,7 +109,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 {
                     _isGameOver = true;
                     Debug.LogError("game over");
-                    _gameStateMachine.SwitchState(GameStateType.Game);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
+                    await _gameStateMachine.SwitchState(GameStateType.Game);
                     return;
                 }
             }
@@ -127,10 +132,10 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             }
 
 
-            CheckWin();
+            await CheckWin();
         }
 
-        private void CheckWin()
+        private async UniTask CheckWin()
         {
             if (GridHelper.CheckWin(_gridModel.Cells))
             {
@@ -138,7 +143,8 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 {
                     _isGameOver = true;
                     Debug.LogError("win");
-                    _gameStateMachine.SwitchState(GameStateType.Game);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
+                    await _gameStateMachine.SwitchState(GameStateType.Game);
                 }
             }
         }
