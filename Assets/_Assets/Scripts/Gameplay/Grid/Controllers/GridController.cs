@@ -110,7 +110,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                     _isGameOver = true;
                     Debug.LogError("game over");
                     await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
-                    await _gameStateMachine.SwitchState(GameStateType.Game);
+                    await _gameStateMachine.SwitchState(GameStateType.MineSweeper);
                     return;
                 }
             }
@@ -144,7 +144,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                     _isGameOver = true;
                     Debug.LogError("win");
                     await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
-                    await _gameStateMachine.SwitchState(GameStateType.Game);
+                    await _gameStateMachine.SwitchState(GameStateType.Sudoku);
                 }
             }
         }

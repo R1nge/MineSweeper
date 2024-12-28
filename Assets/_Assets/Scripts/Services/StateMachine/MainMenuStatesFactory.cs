@@ -29,8 +29,10 @@ namespace _Assets.Scripts.Services.StateMachine
             {
                 case GameStateType.Init:
                     return new InitState(gameStateMachine, _uiStateMachine);
-                case GameStateType.Game:
-                    return new GameState(gameStateMachine, _gridController, _playerInput, _gridViewFactory);
+                case GameStateType.MineSweeper:
+                    return new MineSweeperState(gameStateMachine, _gridController, _playerInput, _gridViewFactory);
+                case GameStateType.Sudoku:
+                    return new SudokuState();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameStateType), gameStateType, null);
             }

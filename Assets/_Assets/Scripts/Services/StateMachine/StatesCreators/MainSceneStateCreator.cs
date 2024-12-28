@@ -22,7 +22,8 @@ namespace _Assets.Scripts.Services.StateMachine.StatesCreators
         public void Init()
         {
             _gameStateMachine.AddState(GameStateType.Init, _mainMenuStatesFactory.CreateAsyncState(GameStateType.Init, _gameStateMachine));
-            _gameStateMachine.AddState(GameStateType.Game, _mainMenuStatesFactory.CreateAsyncState(GameStateType.Game, _gameStateMachine));
+            _gameStateMachine.AddState(GameStateType.MineSweeper, _mainMenuStatesFactory.CreateAsyncState(GameStateType.MineSweeper, _gameStateMachine));
+            _gameStateMachine.AddState(GameStateType.Sudoku, _mainMenuStatesFactory.CreateAsyncState(GameStateType.Sudoku, _gameStateMachine));
             
             _uiStateMachine.AddState(UIStateType.Loading, _mainMenuUIStatesFactory.CreateState(UIStateType.Loading, _uiStateMachine));
             _uiStateMachine.AddState(UIStateType.Game, _mainMenuUIStatesFactory.CreateState(UIStateType.Game, _uiStateMachine));
@@ -31,7 +32,8 @@ namespace _Assets.Scripts.Services.StateMachine.StatesCreators
         public void Dispose()
         {
            _gameStateMachine.RemoveState(GameStateType.Init);
-           _gameStateMachine.RemoveState(GameStateType.Game);
+           _gameStateMachine.RemoveState(GameStateType.MineSweeper);
+           _gameStateMachine.RemoveState(GameStateType.Sudoku);
         }
     }
 }

@@ -8,14 +8,14 @@ using UnityEngine.UI;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
-    public class GameState : IAsyncState
+    public class MineSweeperState : IAsyncState
     {
         private readonly GameStateMachine _stateMachine;
         private readonly GridController _gridController;
         private readonly PlayerInput _playerInput;
         private readonly GridViewFactory _gridViewFactory;
 
-        public GameState(GameStateMachine stateMachine, GridController gridController, PlayerInput playerInput, GridViewFactory gridViewFactory)
+        public MineSweeperState(GameStateMachine stateMachine, GridController gridController, PlayerInput playerInput, GridViewFactory gridViewFactory)
         {
             _stateMachine = stateMachine;
             _gridController = gridController;
@@ -36,7 +36,6 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Exit()
         {
-            _playerInput.Disable();
             _gridController.Dispose();
         }
     }
