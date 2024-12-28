@@ -14,6 +14,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
     {
         private readonly GridGenerator _gridGenerator;
         private readonly GameStateMachine _gameStateMachine;
+        private readonly PlayerInput _playerInput;
         private GridModel _gridModel;
         private GridView _gridView;
         private bool _isFirstReveal;
@@ -22,16 +23,17 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
 
         private readonly Dictionary<CellModel, CellType> _flaggedCells = new();
 
-        public GridController(GridGenerator gridGenerator, GameStateMachine gameStateMachine)
+        public GridController(GridGenerator gridGenerator, GameStateMachine gameStateMachine, PlayerInput playerInput)
         {
             _gridGenerator = gridGenerator;
             _gameStateMachine = gameStateMachine;
+            _playerInput = playerInput;
         }
 
         public void Init(GridView gridView)
         {
-            var width = 8;
-            var height = 6;
+            const int width = 9;
+            const int height = 9;
 
             _gridModel = _gridGenerator.GenerateEmpty(width, height);
             _gridView = gridView;
@@ -94,7 +96,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
             if (_gridModel.Cells[cellView.X, cellView.Y].Revealed ||
                 _gridModel.Cells[cellView.X, cellView.Y].Type == CellType.Flag)
             {
-                CheckWin();
+                await CheckWin();
                 return;
             }
 
@@ -109,6 +111,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 {
                     _isGameOver = true;
                     Debug.LogError("game over");
+                    _playerInput.Disable();
                     await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
                     await _gameStateMachine.SwitchState(GameStateType.MineSweeper);
                     return;
@@ -142,7 +145,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Controllers
                 if (!_isGameOver)
                 {
                     _isGameOver = true;
-                    Debug.LogError("win");
+                    _playerInput.Disable();
                     await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
                     await _gameStateMachine.SwitchState(GameStateType.Sudoku);
                 }
