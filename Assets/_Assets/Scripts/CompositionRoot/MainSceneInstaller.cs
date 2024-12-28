@@ -1,6 +1,7 @@
 using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Gameplay.Grid;
 using _Assets.Scripts.Gameplay.Grid.Controllers;
+using _Assets.Scripts.Services.Grid;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.StateMachine.StatesCreators;
 using _Assets.Scripts.Services.UIs;
@@ -19,6 +20,7 @@ namespace _Assets.Scripts.CompositionRoot
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(playerInput);
+            builder.Register<GridViewFactory>(Lifetime.Singleton);
             
             builder.Register<GridGenerator>(Lifetime.Singleton);
             builder.Register<GridController>(Lifetime.Singleton);

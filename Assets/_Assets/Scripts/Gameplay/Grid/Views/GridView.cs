@@ -16,9 +16,9 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
         {
             if (_cells != null)
             {
-                for (int y = _cells.GetLength(0) - 1; y >= 0; y--)
+                for (int y = _cells.GetLength(1) - 1; y >= 0; y--)
                 {
-                    for (int x = _cells.GetLength(1) - 1; x >= 0; x--)
+                    for (int x = _cells.GetLength(0) - 1; x >= 0; x--)
                     {
                         Destroy(_cells[x, y].GameObject);
                     }

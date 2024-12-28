@@ -37,11 +37,6 @@ namespace _Assets.Scripts.Gameplay.Grid
 
                 foreach (RaycastResult result in results)
                 {
-                    if (!_enabled)
-                    {
-                        break;
-                    }
-
                     if (result.gameObject.TryGetComponent(out ICellView cellView))
                     {
                         if (!_enabled)
@@ -69,8 +64,6 @@ namespace _Assets.Scripts.Gameplay.Grid
                     {
                         break;
                     }
-                    
-                    Debug.Log("Hit " + result.gameObject.name);
 
                     if (result.gameObject.TryGetComponent(out ICellView cellView))
                     {
