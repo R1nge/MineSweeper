@@ -19,9 +19,11 @@ namespace _Assets.Scripts.CompositionRoot
     public class MainSceneInstaller : LifetimeScope
     {
         [SerializeField] private CameraHandler cameraHandler;
+        [SerializeField] private CanvasScaler canvasScaler;
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(canvasScaler);
             builder.RegisterComponent(cameraHandler);
             builder.RegisterEntryPoint<CameraZoomer>().AsSelf();
 
