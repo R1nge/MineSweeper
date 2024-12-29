@@ -25,6 +25,20 @@
             Cells[x, y].SetNumber(number);
         }
 
+        public int[,] ToIntArray()
+        {
+            var arr = new int[Cells.GetLength(0), Cells.GetLength(1)];
+            for (int y = 0; y < Cells.GetLength(1); y++)
+            {
+                for (int x = 0; x < Cells.GetLength(0); x++)
+                {
+                    arr[x, y] = Cells[x, y].Number;
+                }
+            }
+
+            return arr;
+        }
+
         public void IncreaseNumber(int x, int y)
         {
             var nextNumber = (Cells[x, y].Number + 1) % 10;

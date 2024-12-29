@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
+using UnityEngine;
 
 namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 {
@@ -42,6 +43,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             var y = sudokuView.Y;
             _gridModel.IncreaseNumber(x, y);
             sudokuView.SetNumber(_gridModel.Cells[x, y].Number);
+
+            CheckWin();
         }
 
         public void DecreaseNumber(ISudokuCellView sudokuCellView)
@@ -50,6 +53,21 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             var y = sudokuCellView.Y;
             _gridModel.DecreaseNumber(x, y);
             sudokuCellView.SetNumber(_gridModel.Cells[x, y].Number);
+
+            CheckWin();
+        }
+
+        private void CheckWin()
+        {
+            if (_sudoku.IsValidBoard(_gridModel.ToIntArray()))
+            {
+                Debug.LogError("Sudoku WIN");
+            }
+
+            else
+            {
+                Debug.LogError("Sudoku NOT WIN");
+            }
         }
     }
 }

@@ -17,7 +17,10 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             Y = y;
             Number = number;
 
-            SetNumberText(number);
+            if (Number != 0)
+            {
+                SetNumber(Number);
+            }
         }
 
         public void SetNumber(int number)
@@ -30,14 +33,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void SetNumberText(int number)
         {
-            if (number == 0)
-            {
-                numberText.text = string.Empty;
-            }
-            else
-            {
-                numberText.text = number.ToString();
-            }
+            numberText.text = number.ToString();
         }
     }
 }

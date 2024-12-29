@@ -21,6 +21,30 @@ namespace _Assets.Scripts.Gameplay.Sudoku
             return grid;
         }
 
+        private bool IsValid(int[,] sudokuBoard, (int row, int column) cellPosition)
+        {
+            var (row, column) = cellPosition;
+            int value = sudokuBoard[column, row];
+            if (value == 0) return true;
+            bool isUniqueInColumn = SudokuHelper.GetVerticalNeighbours(column)
+                .Select(((int r, int c) cell) => sudokuBoard[cell.c, cell.r]).Count(v => v == value) == 1;
+            bool isUniqueInRow = SudokuHelper.GetHorizontalNeighbours(row)
+                .Select(((int r, int c) cell) => sudokuBoard[cell.c, cell.r]).Count(v => v == value) == 1;
+            bool isUniqueInSquare = SudokuHelper.GetWithinSquareNeighbours(row, column)
+                .Select(((int r, int c) cell) => sudokuBoard[cell.c, cell.r]).Count(v => v == value) == 1;
+            return isUniqueInColumn && isUniqueInRow && isUniqueInSquare;
+        }
+
+        public bool IsValidBoard(int[,] sudokuBoard)
+        {
+            if (SudokuHelper.HasIncorrectDimensions(sudokuBoard)) return false;
+            for (int y = 0; y < 9; y++)
+            for (int x = 0; x < 9; x++)
+                if (!IsValid(sudokuBoard, (y, x)))
+                    return false;
+            return true;
+        }
+
         public void Solve(int[,] grid)
         {
             var guessArray = Enumerable.Range(1, 9).OrderBy(o => _random.Next()).ToArray();
