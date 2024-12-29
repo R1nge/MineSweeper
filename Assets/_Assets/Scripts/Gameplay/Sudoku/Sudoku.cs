@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace _Assets.Scripts.Gameplay.Sudoku
@@ -42,6 +43,46 @@ namespace _Assets.Scripts.Gameplay.Sudoku
             for (int x = 0; x < 9; x++)
                 if (!IsValid(sudokuBoard, (y, x)))
                     return false;
+            return true;
+        }
+
+        public bool CheckWin(int[,] sudokuBoard)
+        {
+            HashSet<int> checkSet = new HashSet<int>();
+
+            for (int i = 0; i < 9; i++)
+            {
+                checkSet.Clear();
+                for (int j = 0; j < 9; j++)
+                {
+                    if (!checkSet.Add(sudokuBoard[i, j]))
+                        return false;
+                }
+
+                checkSet.Clear();
+                for (int j = 0; j < 9; j++)
+                {
+                    if (!checkSet.Add(sudokuBoard[j, i]))
+                        return false;
+                }
+            }
+
+            for (int row = 0; row < 9; row += 3)
+            {
+                for (int col = 0; col < 9; col += 3)
+                {
+                    checkSet.Clear();
+                    for (int i = row; i < row + 3; i++)
+                    {
+                        for (int j = col; j < col + 3; j++)
+                        {
+                            if (!checkSet.Add(sudokuBoard[i, j]))
+                                return false;
+                        }
+                    }
+                }
+            }
+
             return true;
         }
 
