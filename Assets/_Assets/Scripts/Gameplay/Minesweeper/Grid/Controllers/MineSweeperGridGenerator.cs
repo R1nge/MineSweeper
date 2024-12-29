@@ -1,5 +1,5 @@
 ﻿using _Assets.Scripts.Gameplay.Minesweeper.Grid.Models;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
 {
@@ -33,7 +33,8 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
             {
                 for (int x = 0; x < width; x++)
                 {
-                    var neighboursCount = MineSweeperGridHelper.CountNeighbors(_mineSweeperGrid.Cells, x, y, MineSweeperCellType.Mine);
+                    var neighboursCount =
+                        MineSweeperGridHelper.CountNeighbors(_mineSweeperGrid.Cells, x, y, MineSweeperCellType.Mine);
                     _mineSweeperGrid.Cells[x, y].SetNeighboursNumber(neighboursCount);
                 }
             }
@@ -61,7 +62,7 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
             {
                 for (int x = 0; x < width; x++)
                 {
-                    if (Random.Range(0, 5) == 0)
+                    if (Random.Range(1, 50) == 0)
                     {
                         _mineSweeperGrid.Cells[x, y].SetType(MineSweeperCellType.Mine);
                     }
@@ -74,7 +75,8 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
             {
                 for (int x = 0; x < width; x++)
                 {
-                    var neighboursCount = MineSweeperGridHelper.CountNeighbors(_mineSweeperGrid.Cells, x, y, MineSweeperCellType.Mine);
+                    var neighboursCount =
+                        MineSweeperGridHelper.CountNeighbors(_mineSweeperGrid.Cells, x, y, MineSweeperCellType.Mine);
                     _mineSweeperGrid.Cells[x, y].SetNeighboursNumber(neighboursCount);
                 }
             }

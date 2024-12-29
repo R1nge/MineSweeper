@@ -9,17 +9,18 @@ namespace _Assets.Scripts.Services.StateMachine.States
 {
     public class SudokuState : IAsyncState
     {
-        private readonly SudokuGridController _sudokuGridController;
         private readonly GridViewFactory _gridViewFactory;
+        private readonly SudokuGridController _sudokuGridController;
         private readonly SudokuPlayerInput _sudokuPlayerInput;
 
-        public SudokuState(SudokuGridController sudokuGridController, GridViewFactory gridViewFactory, SudokuPlayerInput sudokuPlayerInput)
+        public SudokuState(SudokuGridController sudokuGridController, GridViewFactory gridViewFactory,
+            SudokuPlayerInput sudokuPlayerInput)
         {
             _sudokuGridController = sudokuGridController;
             _gridViewFactory = gridViewFactory;
             _sudokuPlayerInput = sudokuPlayerInput;
         }
-        
+
         public async UniTask Enter()
         {
             var parent = GameObject.Find("GameUI(Clone)").transform;
@@ -28,6 +29,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _sudokuGridController.Init(gridView);
 
             await UniTask.DelayFrame(1);
+            _sudokuPlayerInput.Enable();
         }
 
         public async UniTask Exit()

@@ -35,5 +35,21 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 
             _gridView.Init(_gridModel);
         }
+
+        public void IncreaseNumber(ISudokuCellView sudokuView)
+        {
+            var x = sudokuView.X;
+            var y = sudokuView.Y;
+            _gridModel.IncreaseNumber(x, y);
+            sudokuView.SetNumber(_gridModel.Cells[x, y].Number);
+        }
+
+        public void DecreaseNumber(ISudokuCellView sudokuCellView)
+        {
+            var x = sudokuCellView.X;
+            var y = sudokuCellView.Y;
+            _gridModel.DecreaseNumber(x, y);
+            sudokuCellView.SetNumber(_gridModel.Cells[x, y].Number);
+        }
     }
 }

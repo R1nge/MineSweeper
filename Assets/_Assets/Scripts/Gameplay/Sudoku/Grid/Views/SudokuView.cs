@@ -20,6 +20,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             SetNumberText(number);
         }
 
+        public void SetNumber(int number)
+        {
+            Number = number;
+            SetNumberText(Number);
+        }
+
         public GameObject GameObject => gameObject;
 
         private void SetNumberText(int number)

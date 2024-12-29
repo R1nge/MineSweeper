@@ -7,7 +7,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         public int X { get; }
         public int Y { get; }
         public int Number { get; }
-        public void Init(int x, int y, int number);
         public GameObject GameObject { get; }
+        public void Init(int x, int y, int number);
+        public void SetNumber(int number);
     }
 }

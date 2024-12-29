@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers;
-using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
+using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,15 +9,9 @@ namespace _Assets.Scripts.Gameplay.Sudoku
 {
     public class SudokuPlayerInput : MonoBehaviour
     {
+        private bool _enabled;
         private GraphicRaycaster _raycaster;
         private SudokuGridController _sudokuGridController;
-        private bool _enabled = false;
-
-        public void Init(GraphicRaycaster raycaster, SudokuGridController sudokuGridController)
-        {
-            _raycaster = raycaster;
-            _sudokuGridController = sudokuGridController;
-        }
 
         private void Update()
         {
@@ -26,7 +19,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku
             {
                 return;
             }
-            
+
             if (Input.GetMouseButtonDown(0))
             {
                 PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -37,17 +30,44 @@ namespace _Assets.Scripts.Gameplay.Sudoku
 
                 foreach (RaycastResult result in results)
                 {
-                    if (result.gameObject.TryGetComponent(out IMineSweeperCellView cellView))
+                    if (result.gameObject.TryGetComponent(out ISudokuCellView cellView))
                     {
                         if (!_enabled)
                         {
                             break;
                         }
 
-                        //TODO: sudoku controller
+                        _sudokuGridController.IncreaseNumber(cellView);
                     }
                 }
             }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+                pointerEventData.position = Input.mousePosition;
+
+                List<RaycastResult> results = new List<RaycastResult>();
+                _raycaster.Raycast(pointerEventData, results);
+
+                foreach (RaycastResult result in results)
+                {
+                    if (result.gameObject.TryGetComponent(out ISudokuCellView cellView))
+                    {
+                        if (!_enabled)
+                        {
+                            break;
+                        }
+
+                        _sudokuGridController.DecreaseNumber(cellView);
+                    }
+                }
+            }
+        }
+
+        public void Init(GraphicRaycaster raycaster, SudokuGridController sudokuGridController)
+        {
+            _raycaster = raycaster;
+            _sudokuGridController = sudokuGridController;
         }
 
         public void Enable() => _enabled = true;

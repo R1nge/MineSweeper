@@ -24,5 +24,29 @@
         {
             Cells[x, y].SetNumber(number);
         }
+
+        public void IncreaseNumber(int x, int y)
+        {
+            var nextNumber = (Cells[x, y].Number + 1) % 10;
+
+            if (nextNumber == 0)
+            {
+                nextNumber = 1;
+            }
+
+            Cells[x, y].SetNumber(nextNumber);
+        }
+
+        public void DecreaseNumber(int x, int y)
+        {
+            var prevNumber = (Cells[x, y].Number - 1 + 10) % 10;
+
+            if (prevNumber == 0)
+            {
+                prevNumber = 9;
+            }
+
+            Cells[x, y].SetNumber(prevNumber);
+        }
     }
 }
