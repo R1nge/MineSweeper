@@ -1,7 +1,9 @@
+using _Assets.Scripts.Gameplay.Camera;
 using _Assets.Scripts.Gameplay.Minesweeper;
 using _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers;
 using _Assets.Scripts.Gameplay.Sudoku;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
+using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Grid;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.StateMachine.StatesCreators;
@@ -16,11 +18,13 @@ namespace _Assets.Scripts.CompositionRoot
 {
     public class MainSceneInstaller : LifetimeScope
     {
-        [SerializeField] private MineSweeperPlayerInput mineSweeperPlayerInput;
-        [SerializeField] private SudokuPlayerInput sudokuPlayerInput;
+        [SerializeField] private CameraHandler cameraHandler;
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(cameraHandler);
+            builder.RegisterEntryPoint<CameraZoomer>().AsSelf();
+
             MineSweeper(builder);
             Sudoku(builder);
             builder.Register<GridViewFactory>(Lifetime.Singleton);
@@ -35,7 +39,7 @@ namespace _Assets.Scripts.CompositionRoot
 
         private void MineSweeper(IContainerBuilder builder)
         {
-            builder.RegisterComponent(mineSweeperPlayerInput);
+            builder.RegisterEntryPoint<MineSweeperPlayerInput>().AsSelf();
             builder.Register<MineSweeperGridGenerator>(Lifetime.Singleton);
             builder.Register<MineSweeperGridController>(Lifetime.Singleton);
         }
@@ -43,7 +47,7 @@ namespace _Assets.Scripts.CompositionRoot
         private void Sudoku(IContainerBuilder builder)
         {
             builder.Register<Sudoku>(Lifetime.Singleton);
-            builder.RegisterComponent(sudokuPlayerInput);
+            builder.RegisterEntryPoint<SudokuPlayerInput>().AsSelf();
             builder.Register<SudokuGridController>(Lifetime.Singleton);
         }
     }

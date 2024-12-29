@@ -31,7 +31,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             const int offset = 1;
             if ((subGridX + subGridY) % 2 == offset)
             {
-                image.color = color;
+                //image.color = color;
             }
         }
 

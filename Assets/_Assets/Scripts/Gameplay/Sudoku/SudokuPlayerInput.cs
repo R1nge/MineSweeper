@@ -4,16 +4,17 @@ using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VContainer.Unity;
 
 namespace _Assets.Scripts.Gameplay.Sudoku
 {
-    public class SudokuPlayerInput : MonoBehaviour
+    public class SudokuPlayerInput : ITickable
     {
         private bool _enabled;
         private GraphicRaycaster _raycaster;
         private SudokuGridController _sudokuGridController;
 
-        private void Update()
+        public void Tick()
         {
             if (!_enabled)
             {

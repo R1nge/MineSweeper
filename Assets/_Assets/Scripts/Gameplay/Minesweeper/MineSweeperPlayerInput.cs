@@ -4,16 +4,17 @@ using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VContainer.Unity;
 
 namespace _Assets.Scripts.Gameplay.Minesweeper
 {
-    public class MineSweeperPlayerInput : MonoBehaviour
+    public class MineSweeperPlayerInput : ITickable
     {
         private bool _enabled;
         private MineSweeperGridController _mineSweeperGridController;
         private GraphicRaycaster _raycaster;
 
-        private void Update()
+        public void Tick()
         {
             if (!_enabled)
             {
