@@ -36,10 +36,12 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
             await UniTask.DelayFrame(1);
             _mineSweeperPlayerInput.Enable();
+            _canvasScaler.Enable();
         }
 
         public async UniTask Exit()
         {
+            _canvasScaler.Disable();
             _mineSweeperGridController.Dispose();
         }
     }

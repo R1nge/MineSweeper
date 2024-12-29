@@ -44,7 +44,7 @@ namespace _Assets.Scripts.Services.StateMachine
                     return new MineSweeperState(gameStateMachine, _mineSweeperGridController, _mineSweeperPlayerInput,
                         _gridViewFactory, _canvasScaler);
                 case GameStateType.Sudoku:
-                    return new SudokuState(_sudokuGridController, _gridViewFactory, _sudokuPlayerInput);
+                    return new SudokuState(_sudokuGridController, _gridViewFactory, _sudokuPlayerInput, _canvasScaler);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameStateType), gameStateType, null);
             }
