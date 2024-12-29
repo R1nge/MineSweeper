@@ -8,6 +8,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Models
         public int X;
         public int Y;
         public int Number;
+        public bool IsChangeable;
 
         public void SetPosition(int x, int y)
         {
@@ -15,9 +16,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Models
             Y = y;
         }
 
-        public void SetNumber(int number)
-        {
-            Number = number;
-        }
+        public void SetNumber(int number) => Number = number;
+
+        public void SetChangeable(bool isChangeable) => IsChangeable = isChangeable;
     }
 }

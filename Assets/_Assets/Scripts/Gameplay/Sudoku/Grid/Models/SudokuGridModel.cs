@@ -22,6 +22,15 @@
 
         public void SetNumber(int x, int y, int number)
         {
+            if (number != 0)
+            {
+                Cells[x, y].IsChangeable = false;
+            }
+            else
+            {
+                Cells[x, y].IsChangeable = true;
+            }
+
             Cells[x, y].SetNumber(number);
         }
 
@@ -41,26 +50,32 @@
 
         public void IncreaseNumber(int x, int y)
         {
-            var nextNumber = (Cells[x, y].Number + 1) % 10;
-
-            if (nextNumber == 0)
+            if (Cells[x, y].IsChangeable)
             {
-                nextNumber = 1;
-            }
+                var nextNumber = (Cells[x, y].Number + 1) % 10;
 
-            Cells[x, y].SetNumber(nextNumber);
+                if (nextNumber == 0)
+                {
+                    nextNumber = 1;
+                }
+
+                Cells[x, y].SetNumber(nextNumber);
+            }
         }
 
         public void DecreaseNumber(int x, int y)
         {
-            var prevNumber = (Cells[x, y].Number - 1 + 10) % 10;
-
-            if (prevNumber == 0)
+            if (Cells[x, y].IsChangeable)
             {
-                prevNumber = 9;
-            }
+                var prevNumber = (Cells[x, y].Number - 1 + 10) % 10;
 
-            Cells[x, y].SetNumber(prevNumber);
+                if (prevNumber == 0)
+                {
+                    prevNumber = 9;
+                }
+
+                Cells[x, y].SetNumber(prevNumber);
+            }
         }
     }
 }

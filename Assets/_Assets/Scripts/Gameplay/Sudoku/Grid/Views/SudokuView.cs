@@ -1,11 +1,14 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 {
     public class SudokuView : MonoBehaviour, ISudokuCellView
     {
         [SerializeField] private TextMeshProUGUI numberText;
+        [SerializeField] private RawImage image;
+        [SerializeField] private Color color;
 
         public int X { get; private set; }
         public int Y { get; private set; }
@@ -20,6 +23,15 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             if (Number != 0)
             {
                 SetNumber(Number);
+            }
+
+            var subGridX = x / 3;
+            var subGridY = y / 3;
+
+            const int offset = 1;
+            if ((subGridX + subGridY) % 2 == offset)
+            {
+                image.color = color;
             }
         }
 

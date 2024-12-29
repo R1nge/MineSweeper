@@ -270,3 +270,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberText: {fileID: 5785653636189792172}
+  image: {fileID: 4731723077779575425}
+  color: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
