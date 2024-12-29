@@ -7,12 +7,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku
     {
         private readonly Random _random = new();
 
-        public int[,] Generate()
+        public int[,] Generate(int width, int height)
         {
-            var grid = new int[9, 9];
+            var grid = new int[width, height];
 
-            for (int i = 0; i < 9; i++)
-            for (int j = 0; j < 9; j++)
+            for (int i = 0; i < width; i++)
+            for (int j = 0; j < height; j++)
                 grid[i, j] = 0;
 
             Solve(grid);

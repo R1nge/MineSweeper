@@ -42,7 +42,7 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
         public void Dispose()
         {
             _mineSweeperGridModel = null;
-            Object.Destroy(_mineSweeperGridView);
+            Object.Destroy(_mineSweeperGridView.gameObject);
             _isFirstReveal = false;
             _isGameOver = false;
             _flaggedCells.Clear();

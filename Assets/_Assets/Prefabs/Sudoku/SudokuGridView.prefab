@@ -44,9 +44,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8660094491589945173}
-  - component: {fileID: 8870383728679382268}
+  - component: {fileID: -7437120298914207129}
   m_Layer: 0
-  m_Name: GridView
+  m_Name: SudokuGridView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8870383728679382268
+--- !u!114 &-7437120298914207129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,8 +81,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7236575496018246254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90521aa8cdb84620a237d353cde4c97c, type: 3}
+  m_Script: {fileID: 11500000, guid: d7c977f6c0594c1f81d3bd044073b06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellView: {fileID: 4825172435264848383, guid: bf0e072c73a897744baa491d2eaa3ab5, type: 3}
+  cellView: {fileID: 4825172435264848383, guid: 0434183df4e327b4cb61c0e2146a6e5e, type: 3}
   cellsParent: {fileID: 5422541009243388139}

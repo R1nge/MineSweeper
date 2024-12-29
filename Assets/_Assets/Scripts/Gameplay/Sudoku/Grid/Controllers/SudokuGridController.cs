@@ -1,0 +1,39 @@
+﻿using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
+using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
+
+namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
+{
+    public class SudokuGridController
+    {
+        private readonly Sudoku _sudoku;
+        private SudokuGridModel _gridModel;
+        private SudokuGridView _gridView;
+
+        public SudokuGridController(Sudoku sudoku)
+        {
+            _sudoku = sudoku;
+        }
+
+        public void Init(SudokuGridView sudokuGridView)
+        {
+            const int width = 9;
+            const int height = 9;
+
+            _gridModel = new SudokuGridModel(width, height);
+            _gridView = sudokuGridView;
+
+            var board = _sudoku.Generate(width, height);
+
+            for (int y = 0; y < board.GetLength(1); y++)
+            {
+                for (int x = 0; x < board.GetLength(0); x++)
+                {
+                    _gridModel.SetNumber(x, y, board[x, y]);
+                }
+            }
+
+
+            _gridView.Init(_gridModel);
+        }
+    }
+}

@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: -6020428214072555206}
   - component: {fileID: 3571799357598916479}
   m_Layer: 5
-  m_Name: CellViewSimpleColors
+  m_Name: MineSweeperCellViewSimpleColors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

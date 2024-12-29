@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
+using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,9 +18,14 @@ namespace _Assets.Scripts.Services.Grid
             _configProvider = configProvider;
         }
         
-        public MineSweeperGridView Create(Transform parent)
+        public MineSweeperGridView CreateMineSweeper(Transform parent)
         {
-            return _objectResolver.Instantiate(_configProvider.mineSweeperGridView, parent);
+            return _objectResolver.Instantiate(_configProvider.MineSweeperGridView, parent);
+        }
+
+        public SudokuGridView CreateSudoku(Transform parent)
+        {
+            return _objectResolver.Instantiate(_configProvider.SudokuGridView, parent);
         }
     }
 }

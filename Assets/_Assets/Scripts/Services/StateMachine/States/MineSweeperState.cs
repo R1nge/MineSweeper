@@ -27,7 +27,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             var parent = GameObject.Find("GameUI(Clone)").transform;
             _mineSweeperPlayerInput.Init(parent.GetComponent<GraphicRaycaster>(), _mineSweeperGridController);
-            var gridView = _gridViewFactory.Create(parent);
+            var gridView = _gridViewFactory.CreateMineSweeper(parent);
             _mineSweeperGridController.Init(gridView);
 
             await UniTask.DelayFrame(1);

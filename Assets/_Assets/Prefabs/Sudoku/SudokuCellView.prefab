@@ -148,9 +148,9 @@ GameObject:
   - component: {fileID: 651676716964285684}
   - component: {fileID: 3412285765753443011}
   - component: {fileID: 3571799357598916479}
-  - component: {fileID: -8695108790323959353}
+  - component: {fileID: 5629360239834956493}
   m_Layer: 5
-  m_Name: CellViewSprites
+  m_Name: SudokuCellView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-8695108790323959353
+--- !u!114 &5629360239834956493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,12 +269,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4825172435264848383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c7b41c60234151a8a29e70ea55dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 13e8e24659724ac48a71c1b7d272e9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 3412285765753443011}
-  unrevealed: {fileID: 2981670878619743831, guid: fbfddd998a4e92c4080c1194f2d53c61, type: 3}
-  empty: {fileID: -1403486611, guid: fbfddd998a4e92c4080c1194f2d53c61, type: 3}
-  mine: {fileID: -522154170, guid: fbfddd998a4e92c4080c1194f2d53c61, type: 3}
-  flag: {fileID: -12324955, guid: fbfddd998a4e92c4080c1194f2d53c61, type: 3}
-  neighboursCount: {fileID: 5785653636189792172}
+  numberText: {fileID: 5785653636189792172}
