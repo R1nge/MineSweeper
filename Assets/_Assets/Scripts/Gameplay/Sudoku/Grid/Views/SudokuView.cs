@@ -45,7 +45,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void SetNumberText(int number)
         {
-            numberText.text = number.ToString();
+            if (Number == 0)
+            {
+                numberText.text = string.Empty;
+            }
+            else
+            {
+                numberText.text = number.ToString();
+            }
         }
     }
 }

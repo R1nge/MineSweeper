@@ -21,6 +21,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                 return;
             }
 
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _sudokuGridController.Undo();
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 PointerEventData pointerEventData = new PointerEventData(EventSystem.current);

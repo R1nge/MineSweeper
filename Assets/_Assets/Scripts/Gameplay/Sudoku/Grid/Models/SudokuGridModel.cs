@@ -48,7 +48,7 @@
             return arr;
         }
 
-        public void IncreaseNumber(int x, int y)
+        public int IncreaseNumber(int x, int y)
         {
             if (Cells[x, y].IsChangeable)
             {
@@ -61,9 +61,11 @@
 
                 Cells[x, y].SetNumber(nextNumber);
             }
+
+            return Cells[x, y].Number;
         }
 
-        public void DecreaseNumber(int x, int y)
+        public int DecreaseNumber(int x, int y)
         {
             if (Cells[x, y].IsChangeable)
             {
@@ -76,6 +78,13 @@
 
                 Cells[x, y].SetNumber(prevNumber);
             }
+
+            return Cells[x, y].Number;
+        }
+
+        public SudokuCellModel GetCell(int x, int y)
+        {
+            return Cells[x, y];
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
+using _Assets.Scripts.Services.Undo.Sudoku;
 using UnityEngine;
 
 namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
@@ -9,6 +10,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
         private readonly Sudoku _sudoku;
         private SudokuGridModel _gridModel;
         private SudokuGridView _gridView;
+        private SudokuUndoHistory _sudokuUndoHistory;
 
         public SudokuGridController(Sudoku sudoku)
         {
@@ -17,6 +19,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 
         public void Init(SudokuGridView sudokuGridView)
         {
+            _sudokuUndoHistory = new SudokuUndoHistory();
+
             const int width = 9;
             const int height = 9;
 
@@ -41,25 +45,31 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
         {
             var x = sudokuView.X;
             var y = sudokuView.Y;
-            _gridModel.IncreaseNumber(x, y);
-            sudokuView.SetNumber(_gridModel.Cells[x, y].Number);
-
-            CheckWin();
+            if (_gridModel.Cells[x, y].IsChangeable)
+            {
+                _sudokuUndoHistory.Do(new SudokuIncreaseNumberAction(_gridModel, x, y, sudokuView));
+                CheckWin();
+            }
         }
 
-        public void DecreaseNumber(ISudokuCellView sudokuCellView)
+        public void Undo()
         {
-            var x = sudokuCellView.X;
-            var y = sudokuCellView.Y;
-            _gridModel.DecreaseNumber(x, y);
-            sudokuCellView.SetNumber(_gridModel.Cells[x, y].Number);
+            _sudokuUndoHistory.Undo();
+        }
 
-            CheckWin();
+        public void DecreaseNumber(ISudokuCellView sudokuView)
+        {
+            var x = sudokuView.X;
+            var y = sudokuView.Y;
+            if (_gridModel.Cells[x, y].IsChangeable)
+            {
+                _sudokuUndoHistory.Do(new SudokuDecreaseNumberAction(_gridModel, x, y, sudokuView));
+                CheckWin();
+            }
         }
 
         private void CheckWin()
         {
-            //This won't work, checks only for uniqueness
             if (_sudoku.CheckWin(_gridModel.ToIntArray()))
             {
                 Debug.LogError("Sudoku WIN");
