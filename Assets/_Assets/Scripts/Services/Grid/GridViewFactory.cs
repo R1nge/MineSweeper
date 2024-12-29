@@ -1,5 +1,5 @@
 ﻿using _Assets.Scripts.Configs;
-using _Assets.Scripts.Gameplay.Grid.Views;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,9 +17,9 @@ namespace _Assets.Scripts.Services.Grid
             _configProvider = configProvider;
         }
         
-        public GridView Create(Transform parent)
+        public MineSweeperGridView Create(Transform parent)
         {
-            return _objectResolver.Instantiate(_configProvider._GridView, parent);
+            return _objectResolver.Instantiate(_configProvider.mineSweeperGridView, parent);
         }
     }
 }

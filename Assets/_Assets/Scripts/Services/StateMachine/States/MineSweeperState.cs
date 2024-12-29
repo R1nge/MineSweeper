@@ -1,6 +1,6 @@
 ﻿using _Assets.Scripts.Gameplay;
-using _Assets.Scripts.Gameplay.Grid;
-using _Assets.Scripts.Gameplay.Grid.Controllers;
+using _Assets.Scripts.Gameplay.Minesweeper;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers;
 using _Assets.Scripts.Services.Grid;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,32 +11,32 @@ namespace _Assets.Scripts.Services.StateMachine.States
     public class MineSweeperState : IAsyncState
     {
         private readonly GameStateMachine _stateMachine;
-        private readonly GridController _gridController;
-        private readonly PlayerInput _playerInput;
+        private readonly MineSweeperGridController _mineSweeperGridController;
+        private readonly MineSweeperPlayerInput _mineSweeperPlayerInput;
         private readonly GridViewFactory _gridViewFactory;
 
-        public MineSweeperState(GameStateMachine stateMachine, GridController gridController, PlayerInput playerInput, GridViewFactory gridViewFactory)
+        public MineSweeperState(GameStateMachine stateMachine, MineSweeperGridController mineSweeperGridController, MineSweeperPlayerInput mineSweeperPlayerInput, GridViewFactory gridViewFactory)
         {
             _stateMachine = stateMachine;
-            _gridController = gridController;
-            _playerInput = playerInput;
+            _mineSweeperGridController = mineSweeperGridController;
+            _mineSweeperPlayerInput = mineSweeperPlayerInput;
             _gridViewFactory = gridViewFactory;
         }
 
         public async UniTask Enter()
         {
             var parent = GameObject.Find("GameUI(Clone)").transform;
-            _playerInput.Init(parent.GetComponent<GraphicRaycaster>(), _gridController);
+            _mineSweeperPlayerInput.Init(parent.GetComponent<GraphicRaycaster>(), _mineSweeperGridController);
             var gridView = _gridViewFactory.Create(parent);
-            _gridController.Init(gridView);
+            _mineSweeperGridController.Init(gridView);
 
             await UniTask.DelayFrame(1);
-            _playerInput.Enable();
+            _mineSweeperPlayerInput.Enable();
         }
 
         public async UniTask Exit()
         {
-            _gridController.Dispose();
+            _mineSweeperGridController.Dispose();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using _Assets.Scripts.Gameplay;
-using _Assets.Scripts.Gameplay.Grid.Views;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
 using UnityEngine;
 
 namespace _Assets.Scripts.Configs
@@ -9,6 +9,6 @@ namespace _Assets.Scripts.Configs
         [SerializeField] private UIConfig uiConfig;
         public UIConfig UIConfig => uiConfig;
 
-        public GridView _GridView;
+        public MineSweeperGridView mineSweeperGridView;
     }
 }

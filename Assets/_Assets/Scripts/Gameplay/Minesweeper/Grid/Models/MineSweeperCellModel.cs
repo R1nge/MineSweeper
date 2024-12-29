@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace _Assets.Scripts.Gameplay.Grid.Models
+namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Models
 {
     [Serializable]
-    public class CellModel
+    public class MineSweeperCellModel
     {
         public int X;
         public int Y;
-        public CellType Type;
+        public MineSweeperCellType Type;
         public int NeighboursCount;
         public bool Revealed;
 
@@ -17,7 +17,7 @@ namespace _Assets.Scripts.Gameplay.Grid.Models
             Y = y;
         }
 
-        public void SetType(CellType cellType) => Type = cellType;
+        public void SetType(MineSweeperCellType mineSweeperCellType) => Type = mineSweeperCellType;
 
         public void SetNeighboursNumber(int count) => NeighboursCount = count;
 

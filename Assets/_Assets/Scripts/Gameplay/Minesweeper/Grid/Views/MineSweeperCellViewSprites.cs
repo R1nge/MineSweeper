@@ -1,12 +1,12 @@
 ﻿using System;
-using _Assets.Scripts.Gameplay.Grid.Models;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Assets.Scripts.Gameplay.Grid.Views
+namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Views
 {
-    public class CellViewSprites : MonoBehaviour, ICellView
+    public class MineSweeperCellViewSprites : MonoBehaviour, IMineSweeperCellView
     {
         [SerializeField] private Image image;
         [SerializeField] private Sprite unrevealed;
@@ -16,21 +16,21 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
         public int X { get; private set; }
         public int Y { get; private set; }
 
-        public void Reveal(CellType cellType, int neighboursCount)
+        public void Reveal(MineSweeperCellType mineSweeperCellType, int neighboursCount)
         {
-            switch (cellType)
+            switch (mineSweeperCellType)
             {
-                case CellType.Empty:
+                case MineSweeperCellType.Empty:
                     image.sprite = empty;
                     break;
-                case CellType.Flag:
+                case MineSweeperCellType.Flag:
                     image.sprite = flag;
                     break;
-                case CellType.Mine:
+                case MineSweeperCellType.Mine:
                     image.sprite = mine;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
+                    throw new ArgumentOutOfRangeException(nameof(mineSweeperCellType), mineSweeperCellType, null);
             }
 
             UpdateNeighboursCount(neighboursCount);
@@ -40,26 +40,26 @@ namespace _Assets.Scripts.Gameplay.Grid.Views
 
         public void UnFlag() => image.sprite = unrevealed;
 
-        public void Init(int x, int y, CellType cellType, bool isRevealed, int neighboursCount)
+        public void Init(int x, int y, MineSweeperCellType mineSweeperCellType, bool isRevealed, int neighboursCount)
         {
             X = x;
             Y = y;
 
             if (isRevealed)
             {
-                switch (cellType)
+                switch (mineSweeperCellType)
                 {
-                    case CellType.Empty:
+                    case MineSweeperCellType.Empty:
                         image.sprite = empty;
                         break;
-                    case CellType.Flag:
+                    case MineSweeperCellType.Flag:
                         image.sprite = flag;
                         break;
-                    case CellType.Mine:
+                    case MineSweeperCellType.Mine:
                         image.sprite = mine;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(cellType), cellType, null);
+                        throw new ArgumentOutOfRangeException(nameof(mineSweeperCellType), mineSweeperCellType, null);
                 }
 
                 UpdateNeighboursCount(neighboursCount);

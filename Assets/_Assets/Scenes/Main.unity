@@ -258,7 +258,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 188356526}
   - {fileID: 1527779659}
-  playerInput: {fileID: 581270966}
+  mineSweeperPlayerInput: {fileID: 581270966}
 --- !u!1 &1342794373
 GameObject:
   m_ObjectHideFlags: 0

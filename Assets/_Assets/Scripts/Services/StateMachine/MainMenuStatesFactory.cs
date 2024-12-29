@@ -1,7 +1,7 @@
 ﻿using System;
 using _Assets.Scripts.Gameplay;
-using _Assets.Scripts.Gameplay.Grid;
-using _Assets.Scripts.Gameplay.Grid.Controllers;
+using _Assets.Scripts.Gameplay.Minesweeper;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers;
 using _Assets.Scripts.Services.Grid;
 using _Assets.Scripts.Services.StateMachine.States;
 using _Assets.Scripts.Services.UIs.StateMachine;
@@ -11,15 +11,15 @@ namespace _Assets.Scripts.Services.StateMachine
     public class MainMenuStatesFactory
     {
         private readonly UIStateMachine _uiStateMachine;
-        private readonly GridController _gridController;
-        private readonly PlayerInput _playerInput;
+        private readonly MineSweeperGridController _mineSweeperGridController;
+        private readonly MineSweeperPlayerInput _mineSweeperPlayerInput;
         private readonly GridViewFactory _gridViewFactory;
 
-        private MainMenuStatesFactory(UIStateMachine uiStateMachine, GridController gridController, PlayerInput playerInput, GridViewFactory gridViewFactory)
+        private MainMenuStatesFactory(UIStateMachine uiStateMachine, MineSweeperGridController mineSweeperGridController, MineSweeperPlayerInput mineSweeperPlayerInput, GridViewFactory gridViewFactory)
         {
             _uiStateMachine = uiStateMachine;
-            _gridController = gridController;
-            _playerInput = playerInput;
+            _mineSweeperGridController = mineSweeperGridController;
+            _mineSweeperPlayerInput = mineSweeperPlayerInput;
             _gridViewFactory = gridViewFactory;
         }
 
@@ -30,7 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine
                 case GameStateType.Init:
                     return new InitState(gameStateMachine, _uiStateMachine);
                 case GameStateType.MineSweeper:
-                    return new MineSweeperState(gameStateMachine, _gridController, _playerInput, _gridViewFactory);
+                    return new MineSweeperState(gameStateMachine, _mineSweeperGridController, _mineSweeperPlayerInput, _gridViewFactory);
                 case GameStateType.Sudoku:
                     return new SudokuState();
                 default:

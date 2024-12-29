@@ -1,32 +1,26 @@
 ﻿using System.Collections.Generic;
-using _Assets.Scripts.Gameplay.Grid.Controllers;
-using _Assets.Scripts.Gameplay.Grid.Views;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using VContainer;
 
-namespace _Assets.Scripts.Gameplay.Grid
+namespace _Assets.Scripts.Gameplay.Minesweeper
 {
-    public class PlayerInput : MonoBehaviour
+    public class MineSweeperPlayerInput : MonoBehaviour
     {
         private GraphicRaycaster _raycaster;
-        private GridController _gridController;
+        private MineSweeperGridController _mineSweeperGridController;
         private bool _enabled;
 
-        public void Init(GraphicRaycaster raycaster, GridController gridController)
+        public void Init(GraphicRaycaster raycaster, MineSweeperGridController mineSweeperGridController)
         {
             _raycaster = raycaster;
-            _gridController = gridController;
+            _mineSweeperGridController = mineSweeperGridController;
         }
 
         private void Update()
         {
-            if (!_enabled)
-            {
-                return;
-            }
-
             if (Input.GetMouseButtonDown(0))
             {
                 PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -37,15 +31,16 @@ namespace _Assets.Scripts.Gameplay.Grid
 
                 foreach (RaycastResult result in results)
                 {
-                    if (result.gameObject.TryGetComponent(out ICellView cellView))
+                    if (result.gameObject.TryGetComponent(out IMineSweeperCellView cellView))
                     {
                         if (!_enabled)
                         {
                             break;
                         }
-                        if (!_gridController.TryFillWithMines(cellView))
+
+                        if (!_mineSweeperGridController.TryFillWithMines(cellView))
                         {
-                            _gridController.Reveal(cellView);
+                            _mineSweeperGridController.Reveal(cellView);
                         }
                     }
                 }
@@ -65,9 +60,9 @@ namespace _Assets.Scripts.Gameplay.Grid
                         break;
                     }
 
-                    if (result.gameObject.TryGetComponent(out ICellView cellView))
+                    if (result.gameObject.TryGetComponent(out IMineSweeperCellView cellView))
                     {
-                        _gridController.Flag(cellView);
+                        _mineSweeperGridController.Flag(cellView);
                     }
                 }
             }

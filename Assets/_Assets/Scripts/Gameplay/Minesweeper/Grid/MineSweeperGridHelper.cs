@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using _Assets.Scripts.Gameplay.Grid.Models;
+using _Assets.Scripts.Gameplay.Minesweeper.Grid.Models;
 
-namespace _Assets.Scripts.Gameplay.Grid
+namespace _Assets.Scripts.Gameplay.Minesweeper.Grid
 {
-    public static class GridHelper
+    public static class MineSweeperGridHelper
     {
-        public static int CountNeighbors(CellModel[,] _cells, int x, int y, CellType targetType)
+        public static int CountNeighbors(MineSweeperCellModel[,] _cells, int x, int y, MineSweeperCellType targetType)
         {
             int count = 0;
             int width = _cells.GetLength(0);
@@ -34,9 +34,9 @@ namespace _Assets.Scripts.Gameplay.Grid
             return count;
         }
 
-        public static List<CellModel> GetNeighbors(CellModel[,] _cells, int x, int y)
+        public static List<MineSweeperCellModel> GetNeighbors(MineSweeperCellModel[,] _cells, int x, int y)
         {
-            List<CellModel> neighbors = new List<CellModel>();
+            List<MineSweeperCellModel> neighbors = new List<MineSweeperCellModel>();
             int width = _cells.GetLength(0);
             int height = _cells.GetLength(1);
 
@@ -60,13 +60,13 @@ namespace _Assets.Scripts.Gameplay.Grid
             return neighbors; 
         }
 
-        public static bool CheckWin(CellModel[,] _cells)
+        public static bool CheckWin(MineSweeperCellModel[,] _cells)
         {
             for (int y = 0; y < _cells.GetLength(1); y++)
             {
                 for (int x = 0; x < _cells.GetLength(0); x++)
                 {
-                    if (_cells[x, y].Type == CellType.Mine || _cells[x,y].Type == CellType.Flag)
+                    if (_cells[x, y].Type == MineSweeperCellType.Mine || _cells[x,y].Type == MineSweeperCellType.Flag)
                     {
                         if (_cells[x, y].Revealed)
                         {

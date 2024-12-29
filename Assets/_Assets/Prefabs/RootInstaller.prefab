@@ -63,4 +63,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiConfig: {fileID: 11400000, guid: c01c0ec4a5855f641b051cf97763b193, type: 2}
-  _GridView: {fileID: 8870383728679382268, guid: 6c11b442af4c3e44d9fc3b6414d3e206, type: 3}
+  mineSweeperGridView: {fileID: 8870383728679382268, guid: 6c11b442af4c3e44d9fc3b6414d3e206, type: 3}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace _Assets.Scripts.Misc
+namespace _Assets.Scripts.Gameplay.Sudoku
 {
     public class Sudoku
     {
