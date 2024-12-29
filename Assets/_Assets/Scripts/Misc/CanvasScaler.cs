@@ -11,6 +11,7 @@ namespace _Assets.Scripts.Misc
         private bool _moving;
         private RectTransform _rectTransform;
         private Vector3 _startPosition;
+        private Vector3 _startScale;
 
         private CanvasScaler(CameraHandler cameraHandler)
         {
@@ -45,13 +46,14 @@ namespace _Assets.Scripts.Misc
             if (Input.GetMouseButtonUp(2))
             {
                 _moving = false;
-                _startPosition = Vector3.zero;
+                _startPosition = _cameraHandler.Camera.ScreenToWorldPoint(Input.mousePosition);
             }
         }
 
         public void Init(RectTransform rectTransform)
         {
             _rectTransform = rectTransform;
+            _startScale = _rectTransform.localScale;
         }
 
         public void Enable() => _enabled = true;
@@ -60,15 +62,15 @@ namespace _Assets.Scripts.Misc
 
         private void ZoomIn()
         {
-            var scaleX = Mathf.Clamp(_rectTransform.localScale.x + 0.1f, 0.5f, 2f);
-            var scaleY = Mathf.Clamp(_rectTransform.localScale.y + 0.1f, 0.5f, 2f);
+            var scaleX = Mathf.Clamp(_rectTransform.localScale.x + 0.1f, _startScale.x, 2f);
+            var scaleY = Mathf.Clamp(_rectTransform.localScale.y + 0.1f, _startScale.y, 2f);
             _rectTransform.localScale = new Vector2(scaleX, scaleY);
         }
 
         private void ZoomOut()
         {
-            var scaleX = Mathf.Clamp(_rectTransform.localScale.x - 0.1f, 0.5f, 2f);
-            var scaleY = Mathf.Clamp(_rectTransform.localScale.y - 0.1f, 0.5f, 2f);
+            var scaleX = Mathf.Clamp(_rectTransform.localScale.x - 0.1f, _startScale.x, 2f);
+            var scaleY = Mathf.Clamp(_rectTransform.localScale.y - 0.1f, _startScale.y, 2f);
             _rectTransform.localScale = new Vector2(scaleX, scaleY);
         }
 
