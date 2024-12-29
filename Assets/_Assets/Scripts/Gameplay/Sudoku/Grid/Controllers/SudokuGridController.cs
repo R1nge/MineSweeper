@@ -59,6 +59,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 
         private void CheckWin()
         {
+            //This won't work, checks only for uniqueness
             if (_sudoku.IsValidBoard(_gridModel.ToIntArray()))
             {
                 Debug.LogError("Sudoku WIN");

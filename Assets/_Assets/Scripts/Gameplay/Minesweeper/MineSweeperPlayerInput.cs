@@ -9,18 +9,17 @@ namespace _Assets.Scripts.Gameplay.Minesweeper
 {
     public class MineSweeperPlayerInput : MonoBehaviour
     {
-        private GraphicRaycaster _raycaster;
-        private MineSweeperGridController _mineSweeperGridController;
         private bool _enabled;
-
-        public void Init(GraphicRaycaster raycaster, MineSweeperGridController mineSweeperGridController)
-        {
-            _raycaster = raycaster;
-            _mineSweeperGridController = mineSweeperGridController;
-        }
+        private MineSweeperGridController _mineSweeperGridController;
+        private GraphicRaycaster _raycaster;
 
         private void Update()
         {
+            if (!_enabled)
+            {
+                return;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -66,6 +65,12 @@ namespace _Assets.Scripts.Gameplay.Minesweeper
                     }
                 }
             }
+        }
+
+        public void Init(GraphicRaycaster raycaster, MineSweeperGridController mineSweeperGridController)
+        {
+            _raycaster = raycaster;
+            _mineSweeperGridController = mineSweeperGridController;
         }
 
         public void Enable() => _enabled = true;

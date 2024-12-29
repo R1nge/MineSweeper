@@ -1,7 +1,6 @@
-﻿using _Assets.Scripts.Gameplay.Minesweeper.Grid.Models;
-using _Assets.Scripts.Gameplay.Minesweeper.Grid.Views;
-using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
+﻿using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,8 +10,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
     {
         [SerializeField] private GameObject cellView;
         [SerializeField] private Transform cellsParent;
-        [Inject] private IObjectResolver _objectResolver;
         private ISudokuCellView[,] _cells;
+        [Inject] private IObjectResolver _objectResolver;
 
         public void Init(SudokuGridModel sudokuGridModel)
         {
@@ -39,16 +38,28 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
                 }
             }
 
+
             for (int y = 0; y < sudokuGridModel.Height; y++)
             {
                 for (int x = 0; x < sudokuGridModel.Width; x++)
                 {
+                    var subGridX = x / 3;
+                    var subGridY = y / 3;
+
+                    const int offset = 1;
+                    if ((subGridX + subGridY) % 2 == offset)
+                    {
+                        _cells[x, y].GameObject.GetComponent<RawImage>().color = Color.green;
+                    }
+
+
                     _cells[x, y].GameObject.transform.localPosition = new Vector3(x * 50, y * 50, 0);
                 }
-            }
 
-            cellsParent.transform.localPosition = new Vector3((-sudokuGridModel.Width + 1) * 25,
-                (-sudokuGridModel.Height + 1) * 25, 0);
+
+                cellsParent.transform.localPosition = new Vector3((-sudokuGridModel.Width + 1) * 25,
+                    (-sudokuGridModel.Height + 1) * 25, 0);
+            }
         }
 
         public ISudokuCellView GetCellView(int x, int y) => _cells[x, y];
