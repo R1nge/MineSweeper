@@ -74,7 +74,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             {
                 Debug.LogError("Sudoku WIN");
             }
-
             else
             {
                 Debug.LogError("Sudoku NOT WIN");
