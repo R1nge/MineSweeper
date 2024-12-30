@@ -18,7 +18,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         {
             for (var i = 1; i < images.Length; i++)
             {
-                images[i].sprite = _configProvider.SudokuSkin[i];
+                images[i].sprite = _configProvider.SudokuSkin.Sprites[i];
             }
         }
 
@@ -32,7 +32,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void OnButtonClick(int i)
         {
-            Debug.LogError($"Sub {i}");
             if (i == 0)
             {
                 _sudokuGridController.Reset(_sudokuCellView);

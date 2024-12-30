@@ -5,7 +5,7 @@ using VContainer;
 
 namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 {
-    public class SudokuCatGirlView : MonoBehaviour, ISudokuCellView
+    public class SudokuSkinView : MonoBehaviour, ISudokuCellView
     {
         [SerializeField] private Image image;
         [Inject] private ConfigProvider _configProvider;
@@ -30,14 +30,13 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void SetSprite(int number)
         {
-            Debug.LogError($"Number {number}");
             if (number <= 0)
             {
                 image.sprite = null;
             }
             else
             {
-                image.sprite = _configProvider.SudokuSkin[number];
+                image.sprite = _configProvider.SudokuSkin.Sprites[number];
             }
         }
     }

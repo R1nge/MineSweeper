@@ -12,13 +12,13 @@ namespace _Assets.Scripts.Configs
 
         [SerializeField] private SudokuGridView sudokuGridView;
 
-        [SerializeField] private Sprite[] sudokuSkin;
-
         [SerializeField] private SudokuSelectionView sudokuSelectionView;
+
+        [SerializeField] private SudokuSkinConfig sudokuSkinConfig;
         public UIConfig UIConfig => uiConfig;
         public MineSweeperGridView MineSweeperGridView => mineSweeperGridView;
         public SudokuGridView SudokuGridView => sudokuGridView;
-        public Sprite[] SudokuSkin => sudokuSkin;
         public SudokuSelectionView SudokuSelectionView => sudokuSelectionView;
+        public SudokuSkinConfig SudokuSkin => sudokuSkinConfig;
     }
 }
