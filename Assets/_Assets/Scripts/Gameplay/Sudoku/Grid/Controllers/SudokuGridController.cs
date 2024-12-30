@@ -70,6 +70,18 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             }
         }
 
+        public void Reset(ISudokuCellView sudokuView)
+        {
+            var x = sudokuView.X;
+            var y = sudokuView.Y;
+            if (_gridModel.Cells[x, y].IsChangeable)
+            {
+                _sudokuUndoHistory.Do(new SudokuSetNumberAction(_gridModel, x, y, sudokuView, 0));
+                _sudokuSelectionView.Hide();
+                CheckWin();
+            }
+        }
+
         private void CheckWin()
         {
             if (_sudoku.CheckWin(_gridModel.ToIntArray()))
@@ -84,7 +96,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 
         public void ShowSelection(ISudokuCellView sudokuView)
         {
-            _sudokuSelectionView.Show(sudokuView);
+            var x = sudokuView.X;
+            var y = sudokuView.Y;
+            if (_gridModel.Cells[x, y].IsChangeable)
+            {
+                _sudokuSelectionView.Show(sudokuView);
+            }
         }
     }
 }

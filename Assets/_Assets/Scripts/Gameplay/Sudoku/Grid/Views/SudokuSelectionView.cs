@@ -33,7 +33,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         private void OnButtonClick(int i)
         {
             Debug.LogError($"Sub {i}");
-            _sudokuGridController.SetNumber(_sudokuCellView, i);
+            if (i == 0)
+            {
+                _sudokuGridController.Reset(_sudokuCellView);
+            }
+            else
+            {
+                _sudokuGridController.SetNumber(_sudokuCellView, i);
+            }
         }
 
         public void Show(ISudokuCellView sudokuView)

@@ -36,16 +36,16 @@ namespace _Assets.Scripts.Gameplay.Sudoku
 
                 foreach (RaycastResult result in results)
                 {
+                    if (result.gameObject.TryGetComponent(out Button button))
+                    {
+                        Debug.LogWarning("Clicked on the button");
+                        break;
+                    }
+
                     if (result.gameObject.TryGetComponent(out ISudokuCellView cellView))
                     {
                         if (!_enabled)
                         {
-                            break;
-                        }
-
-                        if (result.gameObject.TryGetComponent(out Button button))
-                        {
-                            Debug.LogWarning("Clicked on the button");
                             break;
                         }
 

@@ -23,13 +23,13 @@ namespace _Assets.Scripts.Services.Undo.Sudoku
         public void Execute()
         {
             _previousValue = _model.GetCell(_x, _y).Number;
-            _model.SetNumber(_x, _y, _number);
+            _model.GetCell(_x, _y).SetNumber(_number);
             _cellView.SetNumber(_number);
         }
 
         public void Undo()
         {
-            _model.SetNumber(_x, _y, _previousValue);
+            _model.GetCell(_x, _y).SetNumber(_previousValue);
             _cellView.SetNumber(_previousValue);
         }
     }
