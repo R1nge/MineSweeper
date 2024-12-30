@@ -65,3 +65,15 @@ MonoBehaviour:
   uiConfig: {fileID: 11400000, guid: c01c0ec4a5855f641b051cf97763b193, type: 2}
   mineSweeperGridView: {fileID: 8870383728679382268, guid: 6c11b442af4c3e44d9fc3b6414d3e206, type: 3}
   sudokuGridView: {fileID: -7437120298914207129, guid: f728f94080d708f428dbff9b22c12050, type: 3}
+  sudokuSkin:
+  - {fileID: 21300000, guid: f253ddcc76fba0f47a848eefecf7bfc5, type: 3}
+  - {fileID: 21300000, guid: 67bf8cfe51dbd1846866d3d56718e8db, type: 3}
+  - {fileID: 21300000, guid: 1111ac1e417843d4bb469f57e5e75323, type: 3}
+  - {fileID: 21300000, guid: 9a00636d0932f9e40bc069131cc9dc1b, type: 3}
+  - {fileID: 21300000, guid: 02ad338fc2bb9f24296ba02226f0c835, type: 3}
+  - {fileID: 21300000, guid: d248055b468b4aa438fa9117a9751f4a, type: 3}
+  - {fileID: 21300000, guid: f6530cbe88ac0fa48bc55db7facdff23, type: 3}
+  - {fileID: 21300000, guid: 55ca931f82a823248b9cff3c6029a1ac, type: 3}
+  - {fileID: 21300000, guid: d01a6b9ec781731439a523e5fbdab20a, type: 3}
+  - {fileID: 21300000, guid: f821c6d5f5c241348b3cc989314af0fe, type: 3}
+  sudokuSelectionView: {fileID: 7805690850728876065, guid: e8ee1e534ccc5454988ce23c042f733c, type: 3}

@@ -1,20 +1,28 @@
-﻿using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
+﻿using _Assets.Scripts.Configs;
+using _Assets.Scripts.Gameplay.Sudoku.Grid.Models;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Views;
 using _Assets.Scripts.Services.Undo.Sudoku;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 {
     public class SudokuGridController
     {
+        private readonly ConfigProvider _configProvider;
+        private readonly IObjectResolver _objectResolver;
         private readonly Sudoku _sudoku;
         private SudokuGridModel _gridModel;
         private SudokuGridView _gridView;
+        private SudokuSelectionView _sudokuSelectionView;
         private SudokuUndoHistory _sudokuUndoHistory;
 
-        public SudokuGridController(Sudoku sudoku)
+        public SudokuGridController(Sudoku sudoku, IObjectResolver objectResolver, ConfigProvider configProvider)
         {
             _sudoku = sudoku;
+            _objectResolver = objectResolver;
+            _configProvider = configProvider;
         }
 
         public void Init(SudokuGridView sudokuGridView)
@@ -39,17 +47,10 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
 
 
             _gridView.Init(_gridModel);
-        }
 
-        public void IncreaseNumber(ISudokuCellView sudokuView)
-        {
-            var x = sudokuView.X;
-            var y = sudokuView.Y;
-            if (_gridModel.Cells[x, y].IsChangeable)
-            {
-                _sudokuUndoHistory.Do(new SudokuIncreaseNumberAction(_gridModel, x, y, sudokuView));
-                CheckWin();
-            }
+            _sudokuSelectionView =
+                _objectResolver.Instantiate(_configProvider.SudokuSelectionView, sudokuGridView.transform);
+            _sudokuSelectionView.Hide();
         }
 
         public void Undo()
@@ -57,13 +58,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             _sudokuUndoHistory.Undo();
         }
 
-        public void DecreaseNumber(ISudokuCellView sudokuView)
+        public void SetNumber(ISudokuCellView sudokuView, int number)
         {
             var x = sudokuView.X;
             var y = sudokuView.Y;
             if (_gridModel.Cells[x, y].IsChangeable)
             {
-                _sudokuUndoHistory.Do(new SudokuDecreaseNumberAction(_gridModel, x, y, sudokuView));
+                _sudokuUndoHistory.Do(new SudokuSetNumberAction(_gridModel, x, y, sudokuView, number));
+                _sudokuSelectionView.Hide();
                 CheckWin();
             }
         }
@@ -78,6 +80,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             {
                 Debug.LogError("Sudoku NOT WIN");
             }
+        }
+
+        public void ShowSelection(ISudokuCellView sudokuView)
+        {
+            _sudokuSelectionView.Show(sudokuView);
         }
     }
 }

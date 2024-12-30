@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using _Assets.Scripts.Configs;
+using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 {
     public class SudokuCatGirlView : MonoBehaviour, ISudokuCellView
     {
         [SerializeField] private Image image;
-        [SerializeField] private Sprite[] sprites;
+        [Inject] private ConfigProvider _configProvider;
 
         public int X { get; private set; }
         public int Y { get; private set; }
@@ -28,13 +30,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void SetSprite(int number)
         {
+            Debug.LogError($"Number {number}");
             if (number <= 0)
             {
                 image.sprite = null;
             }
             else
             {
-                image.sprite = sprites[number];
+                image.sprite = _configProvider.SudokuSkin[number];
             }
         }
     }

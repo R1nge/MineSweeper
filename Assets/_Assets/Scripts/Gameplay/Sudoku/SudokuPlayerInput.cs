@@ -43,28 +43,9 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                             break;
                         }
 
-                        _sudokuGridController.IncreaseNumber(cellView);
-                    }
-                }
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-                pointerEventData.position = Input.mousePosition;
-
-                List<RaycastResult> results = new List<RaycastResult>();
-                _raycaster.Raycast(pointerEventData, results);
-
-                foreach (RaycastResult result in results)
-                {
-                    if (result.gameObject.TryGetComponent(out ISudokuCellView cellView))
-                    {
-                        if (!_enabled)
-                        {
-                            break;
-                        }
-
-                        _sudokuGridController.DecreaseNumber(cellView);
+                        //TODO:
+                        //show sudoku selection view
+                        _sudokuGridController.ShowSelection(cellView);
                     }
                 }
             }
