@@ -24,6 +24,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku
             if (Input.GetKeyDown(KeyCode.R))
             {
                 _sudokuGridController.Undo();
+                _sudokuGridController.HideSelection();
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -34,10 +35,13 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                 List<RaycastResult> results = new List<RaycastResult>();
                 _raycaster.Raycast(pointerEventData, results);
 
+                bool hit = false;
+
                 foreach (RaycastResult result in results)
                 {
                     if (result.gameObject.TryGetComponent(out Button button))
                     {
+                        hit = true;
                         Debug.LogWarning("Clicked on the button");
                         break;
                     }
@@ -49,8 +53,14 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                             break;
                         }
 
+                        hit = true;
                         _sudokuGridController.ShowSelection(cellView);
                     }
+                }
+
+                if (!hit)
+                {
+                    _sudokuGridController.HideSelection();
                 }
             }
         }

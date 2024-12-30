@@ -58,6 +58,11 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             _sudokuUndoHistory.Undo();
         }
 
+        public void HideSelection()
+        {
+            _sudokuSelectionView.Hide();
+        }
+
         public void SetNumber(ISudokuCellView sudokuView, int number)
         {
             var x = sudokuView.X;
