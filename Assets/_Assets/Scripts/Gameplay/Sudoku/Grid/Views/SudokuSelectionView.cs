@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using _Assets.Scripts.Configs;
+﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,14 +50,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
             _sudokuCellView = sudokuView;
             gameObject.SetActive(true);
-            StartCoroutine(Show());
-        }
-
-        private IEnumerator Show()
-        {
-            yield return new WaitForEndOfFrame();
-
-
             for (int i = 0; i < buttons.Length; i++)
             {
                 var i1 = i;

@@ -26,7 +26,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                 _sudokuGridController.Undo();
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
                 pointerEventData.position = Input.mousePosition;
@@ -43,8 +43,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                             break;
                         }
 
-                        //TODO:
-                        //show sudoku selection view
+                        if (result.gameObject.TryGetComponent(out Button button))
+                        {
+                            Debug.LogWarning("Clicked on the button");
+                            break;
+                        }
+
                         _sudokuGridController.ShowSelection(cellView);
                     }
                 }
