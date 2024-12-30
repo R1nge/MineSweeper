@@ -10,6 +10,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         [SerializeField] private RawImage image;
         [SerializeField] private Color color;
 
+        private int _numberNote;
+
         public int X { get; private set; }
         public int Y { get; private set; }
         public int Number { get; private set; }
@@ -41,17 +43,28 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             SetNumberText(Number);
         }
 
+        public void SetNumberNote(int number)
+        {
+            _numberNote = number;
+        }
+
         public GameObject GameObject => gameObject;
 
         private void SetNumberText(int number)
         {
-            if (Number == 0)
+            if (_numberNote != 0)
             {
-                numberText.text = string.Empty;
             }
             else
             {
-                numberText.text = number.ToString();
+                if (Number == 0)
+                {
+                    numberText.text = string.Empty;
+                }
+                else
+                {
+                    numberText.text = number.ToString();
+                }
             }
         }
     }

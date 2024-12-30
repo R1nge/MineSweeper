@@ -75,6 +75,17 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers
             }
         }
 
+        public void SetNumberNote(ISudokuCellView sudokuView, int number)
+        {
+            var x = sudokuView.X;
+            var y = sudokuView.Y;
+            if (_gridModel.Cells[x, y].IsChangeable)
+            {
+                _sudokuUndoHistory.Do(new SudokuSetNumberNoteAction(_gridModel, x, y, sudokuView, number));
+                _sudokuSelectionView.Hide();
+            }
+        }
+
         public void Reset(ISudokuCellView sudokuView)
         {
             var x = sudokuView.X;

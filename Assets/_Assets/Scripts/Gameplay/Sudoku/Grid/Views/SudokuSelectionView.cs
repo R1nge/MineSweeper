@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
+using _Assets.Scripts.Services.UIs;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -9,7 +10,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
     public class SudokuSelectionView : MonoBehaviour
     {
         [SerializeField] private Image[] images;
-        [SerializeField] private Button[] buttons;
+        [SerializeField] private MyButton[] buttons;
         [Inject] private ConfigProvider _configProvider;
         private ISudokuCellView _sudokuCellView;
         [Inject] private SudokuGridController _sudokuGridController;
@@ -22,23 +23,27 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             }
         }
 
-        private void OnDestroy()
+        private void OnLeftClick(int index)
         {
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                buttons[i].onClick.RemoveAllListeners();
-            }
-        }
-
-        private void OnButtonClick(int i)
-        {
-            if (i == 0)
+            if (index == 0)
             {
                 _sudokuGridController.Reset(_sudokuCellView);
             }
             else
             {
-                _sudokuGridController.SetNumber(_sudokuCellView, i);
+                _sudokuGridController.SetNumber(_sudokuCellView, index);
+            }
+        }
+
+        private void OnRightClick(int index)
+        {
+            if (index == 0)
+            {
+                _sudokuGridController.Reset(_sudokuCellView);
+            }
+            else
+            {
+                _sudokuGridController.SetNumberNote(_sudokuCellView, index);
             }
         }
 
@@ -46,7 +51,9 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         {
             for (int i = 0; i < buttons.Length; i++)
             {
-                buttons[i].onClick.RemoveAllListeners();
+                var i1 = i;
+                buttons[i].OnLeftClick += () => OnLeftClick(i1);
+                buttons[i].OnRightClick += () => OnRightClick(i1);
             }
 
             var cellLocalPosition = sudokuView.GameObject.transform.localPosition;
@@ -56,16 +63,16 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
             _sudokuCellView = sudokuView;
             gameObject.SetActive(true);
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                var i1 = i;
-                buttons[i].onClick.AddListener(() => OnButtonClick(i1));
-            }
         }
 
         public void Hide()
         {
             gameObject.SetActive(false);
+
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].Unsub();
+            }
         }
     }
 }

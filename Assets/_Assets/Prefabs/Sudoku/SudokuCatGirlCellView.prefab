@@ -272,15 +272,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec34cd9917514696813eb162c16c6a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  note: {r: 1, g: 1, b: 1, a: 0.5019608}
   image: {fileID: 6221019035754431059}
-  sprites:
-  - {fileID: 21300000, guid: 59e69813d9bdf9b4297935e5ea7f2d7a, type: 3}
-  - {fileID: 21300000, guid: 247f1d7c6cd6f6147b546feeae7c8e6d, type: 3}
-  - {fileID: 21300000, guid: d91df40b33e005e4d89c520d63f5cfba, type: 3}
-  - {fileID: 21300000, guid: af49fe1385acd304f814ed0406916b6e, type: 3}
-  - {fileID: 21300000, guid: 6d99c017e2dbb8d4fb35442f29da710a, type: 3}
-  - {fileID: 21300000, guid: 307f53ac7a79bcd46947019115a6381c, type: 3}
-  - {fileID: 21300000, guid: f6530cbe88ac0fa48bc55db7facdff23, type: 3}
-  - {fileID: 21300000, guid: 55ca931f82a823248b9cff3c6029a1ac, type: 3}
-  - {fileID: 21300000, guid: 159a535651ece334eaeaa3c72b3f4b59, type: 3}
-  - {fileID: 21300000, guid: 60214d8a032fd0d46ad53e828f96165e, type: 3}

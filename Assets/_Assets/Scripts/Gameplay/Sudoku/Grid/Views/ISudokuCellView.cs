@@ -10,5 +10,6 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         public GameObject GameObject { get; }
         public void Init(int x, int y, int number);
         public void SetNumber(int number);
+        public void SetNumberNote(int number);
     }
 }

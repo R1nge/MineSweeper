@@ -165,10 +165,12 @@ namespace _Assets.Scripts.Gameplay.Sudoku
                 int x = randomIndexes[i] / 9;
                 int y = randomIndexes[i] % 9;
                 int temp = grid[x, y];
+                //This makes a cell empty
                 grid[x, y] = 0;
 
                 int check = 0;
                 CheckUniqueness(grid, guessArray, ref check);
+                //This check for gaps?
                 if (check != 1)
                 {
                     grid[x, y] = temp;
