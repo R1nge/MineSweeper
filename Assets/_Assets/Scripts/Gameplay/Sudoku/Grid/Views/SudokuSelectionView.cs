@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Configs;
+﻿using System.Collections;
+using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         private void Awake()
         {
-            for (var i = 0; i < images.Length; i++)
+            for (var i = 1; i < images.Length; i++)
             {
                 images[i].sprite = _configProvider.SudokuSkin[i];
             }
@@ -43,8 +44,20 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
                 buttons[i].onClick.RemoveAllListeners();
             }
 
-            gameObject.SetActive(true);
+            var cellLocalPosition = sudokuView.GameObject.transform.localPosition;
+            var cellPositionInGrid = sudokuView.GameObject.transform.parent.TransformPoint(cellLocalPosition);
+            var newPosition = transform.parent.InverseTransformPoint(cellPositionInGrid);
+            transform.localPosition = newPosition;
+
             _sudokuCellView = sudokuView;
+            gameObject.SetActive(true);
+            StartCoroutine(Show());
+        }
+
+        private IEnumerator Show()
+        {
+            yield return new WaitForEndOfFrame();
+
 
             for (int i = 0; i < buttons.Length; i++)
             {
