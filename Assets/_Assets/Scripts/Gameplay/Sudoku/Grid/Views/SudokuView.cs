@@ -48,6 +48,10 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             _numberNote = number;
         }
 
+        public void SetNumbers(int value, int note)
+        {
+        }
+
         public GameObject GameObject => gameObject;
 
         private void SetNumberText(int number)

@@ -30,6 +30,7 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         public void SetNumber(int number)
         {
+            Number = number;
             _numberNote = 0;
             SetSprite(number);
         }
@@ -37,20 +38,34 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
         public void SetNumberNote(int number)
         {
             _numberNote = number;
+            Number = 0;
             SetSprite(number);
+        }
+
+        public void SetNumbers(int value, int note)
+        {
+            Number = value;
+            _numberNote = note;
+
+            if (Number != 0)
+            {
+                SetSprite(Number);
+                image.color = _defaultColor;
+            }
+            else if (_numberNote != 0)
+            {
+                SetSprite(_numberNote);
+                image.color = this.note;
+            }
+            else
+            {
+                SetSprite(0);
+                image.color = _defaultColor;
+            }
         }
 
         private void SetSprite(int number)
         {
-            if (_numberNote != 0)
-            {
-                image.color = note;
-            }
-            else
-            {
-                image.color = _defaultColor;
-            }
-
             if (number <= 0)
             {
                 image.sprite = null;
@@ -58,6 +73,15 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
             else
             {
                 image.sprite = _configProvider.SudokuSkin.Sprites[number];
+            }
+
+            if (_numberNote != 0)
+            {
+                image.color = note;
+            }
+            else
+            {
+                image.color = _defaultColor;
             }
         }
     }
