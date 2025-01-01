@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
 using _Assets.Scripts.Services.UIs;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -49,6 +50,8 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
         public void Show(ISudokuCellView sudokuView)
         {
+            transform.localScale = Vector3.zero;
+
             for (int i = 0; i < buttons.Length; i++)
             {
                 var i1 = i;
@@ -63,11 +66,18 @@ namespace _Assets.Scripts.Gameplay.Sudoku.Grid.Views
 
             _sudokuCellView = sudokuView;
             gameObject.SetActive(true);
+
+            transform.DOScale(1f, 0.2f);
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            transform.DOScale(0f, 0.2f).OnComplete(() => gameObject.SetActive(false));
+
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].transform.DOScale(1f, 0.1f);
+            }
 
             for (int i = 0; i < buttons.Length; i++)
             {
