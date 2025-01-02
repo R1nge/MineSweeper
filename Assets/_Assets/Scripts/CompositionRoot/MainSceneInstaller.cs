@@ -1,8 +1,6 @@
 using _Assets.Scripts.Gameplay.Camera;
 using _Assets.Scripts.Gameplay.Minesweeper;
 using _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers;
-using _Assets.Scripts.Gameplay.Sudoku;
-using _Assets.Scripts.Gameplay.Sudoku.Grid.Controllers;
 using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Grid;
 using _Assets.Scripts.Services.StateMachine;
@@ -27,7 +25,6 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterEntryPoint<CameraZoomer>().AsSelf();
 
             MineSweeper(builder);
-            Sudoku(builder);
             builder.Register<GridViewFactory>(Lifetime.Singleton);
 
             builder.Register<MainMenuUIStatesFactory>(Lifetime.Singleton);
@@ -43,13 +40,6 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterEntryPoint<MineSweeperPlayerInput>().AsSelf();
             builder.Register<MineSweeperGridGenerator>(Lifetime.Singleton);
             builder.Register<MineSweeperGridController>(Lifetime.Singleton);
-        }
-
-        private void Sudoku(IContainerBuilder builder)
-        {
-            builder.Register<Sudoku>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<SudokuPlayerInput>().AsSelf();
-            builder.Register<SudokuGridController>(Lifetime.Singleton);
         }
     }
 }

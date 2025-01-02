@@ -11,18 +11,18 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
 {
     public class MineSweeperGridController
     {
-        private readonly MineSweeperGridGenerator _mineSweeperGridGenerator;
+        private readonly Dictionary<MineSweeperCellModel, MineSweeperCellType> _flaggedCells = new();
         private readonly GameStateMachine _gameStateMachine;
+        private readonly MineSweeperGridGenerator _mineSweeperGridGenerator;
         private readonly MineSweeperPlayerInput _mineSweeperPlayerInput;
-        private MineSweeperGridModel _mineSweeperGridModel;
-        private MineSweeperGridView _mineSweeperGridView;
+        private float _delayBeforeRestart = 2;
         private bool _isFirstReveal;
         private bool _isGameOver;
-        private float _delayBeforeRestart = 2;
+        private MineSweeperGridModel _mineSweeperGridModel;
+        private MineSweeperGridView _mineSweeperGridView;
 
-        private readonly Dictionary<MineSweeperCellModel, MineSweeperCellType> _flaggedCells = new();
-
-        public MineSweeperGridController(MineSweeperGridGenerator mineSweeperGridGenerator, GameStateMachine gameStateMachine, MineSweeperPlayerInput mineSweeperPlayerInput)
+        public MineSweeperGridController(MineSweeperGridGenerator mineSweeperGridGenerator,
+            GameStateMachine gameStateMachine, MineSweeperPlayerInput mineSweeperPlayerInput)
         {
             _mineSweeperGridGenerator = mineSweeperGridGenerator;
             _gameStateMachine = gameStateMachine;
@@ -55,7 +55,8 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
                 return false;
             }
 
-            _mineSweeperGridModel = _mineSweeperGridGenerator.FillWithMines(_mineSweeperGridModel.Width, _mineSweeperGridModel.Height, mineSweeperCellView.X, mineSweeperCellView.Y);
+            _mineSweeperGridModel = _mineSweeperGridGenerator.FillWithMines(_mineSweeperGridModel.Width,
+                _mineSweeperGridModel.Height, mineSweeperCellView.X, mineSweeperCellView.Y);
             _isFirstReveal = true;
             Reveal(mineSweeperCellView);
             _mineSweeperGridView.Init(_mineSweeperGridModel);
@@ -84,7 +85,8 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
             {
                 if (_flaggedCells.TryAdd(model, model.Type))
                 {
-                    _mineSweeperGridModel.Cells[mineSweeperCellView.X, mineSweeperCellView.Y].SetType(MineSweeperCellType.Flag);
+                    _mineSweeperGridModel.Cells[mineSweeperCellView.X, mineSweeperCellView.Y]
+                        .SetType(MineSweeperCellType.Flag);
                     mineSweeperCellView.Flag();
                 }
             }
@@ -93,7 +95,8 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
         public async void Reveal(IMineSweeperCellView mineSweeperCellView)
         {
             if (_mineSweeperGridModel.Cells[mineSweeperCellView.X, mineSweeperCellView.Y].Revealed ||
-                _mineSweeperGridModel.Cells[mineSweeperCellView.X, mineSweeperCellView.Y].Type == MineSweeperCellType.Flag)
+                _mineSweeperGridModel.Cells[mineSweeperCellView.X, mineSweeperCellView.Y].Type ==
+                MineSweeperCellType.Flag)
             {
                 await CheckWin();
                 return;
@@ -102,7 +105,8 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
             var x = mineSweeperCellView.X;
             var y = mineSweeperCellView.Y;
             _mineSweeperGridModel.Cells[x, y].Reveal();
-            mineSweeperCellView.Reveal(_mineSweeperGridModel.Cells[x, y].Type, _mineSweeperGridModel.Cells[x, y].NeighboursCount);
+            mineSweeperCellView.Reveal(_mineSweeperGridModel.Cells[x, y].Type,
+                _mineSweeperGridModel.Cells[x, y].NeighboursCount);
 
             if (_mineSweeperGridModel.Cells[x, y].Type == MineSweeperCellType.Mine)
             {
@@ -146,7 +150,7 @@ namespace _Assets.Scripts.Gameplay.Minesweeper.Grid.Controllers
                     _isGameOver = true;
                     _mineSweeperPlayerInput.Disable();
                     await UniTask.Delay(TimeSpan.FromSeconds(_delayBeforeRestart));
-                    await _gameStateMachine.SwitchState(GameStateType.Sudoku);
+                    //await _gameStateMachine.SwitchState(GameStateType.Sudoku);
                 }
             }
         }

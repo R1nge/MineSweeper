@@ -4,7 +4,6 @@
     {
         None = 0,
         Init = 1,
-        MineSweeper = 2,
-        Sudoku = 3
+        MineSweeper = 2
     }
 }
